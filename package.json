@@ -2,8 +2,7 @@
   "name": "@nanostores/logger",
   "version": "0.0.0",
   "description": "Nanostores logger",
-  "keywords": [
-  ],
+  "keywords": [],
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage && eslint . && check-dts && size-limit && yaspeller *.md",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch"
@@ -120,6 +119,10 @@
     "**/errors.ts"
   ],
   "size-limit": [
+    {
+      "path": "./index.js",
+      "limit": "149 B"
+    }
   ],
   "clean-publish": {
     "cleanDocs": true
