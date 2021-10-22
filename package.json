@@ -2,7 +2,11 @@
   "name": "@nanostores/logger",
   "version": "0.0.0",
   "description": "Nanostores logger",
-  "keywords": [],
+  "keywords": [
+    "nanostores",
+    "state-managment",
+    "logger"
+  ],
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage && eslint . && check-dts && size-limit && yaspeller *.md",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch"
@@ -104,7 +108,7 @@
     },
     "overrides": [
       {
-        "files": "deprecated/index.js",
+        "files": "index.**",
         "rules": {
           "no-console": "off"
         }
@@ -114,9 +118,6 @@
       "jsdom": false
     }
   },
-  "eslintIgnore": [
-    "**/errors.ts"
-  ],
   "size-limit": [
     {
       "path": "./index.js",

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { lastAction, onBuild, onMount, onSet, onStop } from 'nanostores'
 
 let printStyles = background =>

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { action, atom, map, mapTemplate } from 'nanostores'
 import { jest } from '@jest/globals'
 import { SpyInstance } from 'jest-mock'
