@@ -44,7 +44,7 @@ describe('Logger', () => {
       let unbind = logger({ [storeName]: store })
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cstart%c${storeName}`,
+        `%c %cstart%c${storeName}`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:blue;',
         'padding-left:4px;padding-right:4px;font-weight:normal;'
@@ -67,7 +67,7 @@ describe('Logger', () => {
       let unbindStore = store.listen(() => {})
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%ccreate%c${storeName}`,
+        `%c %ccreate%c${storeName}`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:#8f1fff;',
         'padding-left:4px;padding-right:4px;font-weight:normal;'
@@ -83,7 +83,7 @@ describe('Logger', () => {
       await delay(1020)
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cstop%c${storeName}`,
+        `%c %cstop%c${storeName}`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:tomato;',
         'padding-left:4px;padding-right:4px;font-weight:normal;'
@@ -111,7 +111,7 @@ describe('Logger', () => {
       store.set({ value: 2 })
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -150,7 +150,7 @@ describe('Logger', () => {
       store.set({ value: 3 })
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -196,7 +196,7 @@ describe('Logger', () => {
       })
       myAction()
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -251,7 +251,7 @@ describe('Logger', () => {
       store.set({ value: 2, id: '1' })
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -290,7 +290,7 @@ describe('Logger', () => {
       store.set({ value: 3, id: '1' })
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -338,7 +338,7 @@ describe('Logger', () => {
       })
       myAction()
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -379,7 +379,7 @@ describe('Logger', () => {
       store.setKey('value', 3)
 
       expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-        `%cnanostores%cchange%c${storeName} →`,
+        `%c %cchange%c${storeName} →`,
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
         'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:green;',
         'padding-left:4px;padding-right:4px;font-weight:normal;',
@@ -434,7 +434,7 @@ describe('Logger', () => {
     let store = LocalTemplate('2')
     let unsub = store.listen(() => {})
     expect(console.groupCollapsed).toHaveBeenLastCalledWith(
-      `%cnanostores%cstart%cstore-2`,
+      `%c %cstart%cstore-2`,
       'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:black;',
       'color:white;padding-left:4px;padding-right:4px;font-weight:normal;background:blue;',
       'padding-left:4px;padding-right:4px;font-weight:normal;'

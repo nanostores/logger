@@ -108,7 +108,7 @@
     },
     "overrides": [
       {
-        "files": "index.**",
+        "files": "*.{ts,js}",
         "rules": {
           "no-console": "off"
         }
@@ -121,7 +121,8 @@
   "size-limit": [
     {
       "path": "./index.js",
-      "limit": "149 B"
+      "import": "{ logger }",
+      "limit": "1221 B"
     }
   ],
   "clean-publish": {
