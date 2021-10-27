@@ -56,7 +56,7 @@ export let log = ({ logType, storeName, value, message, group }) => {
   }
   if (group) {
     badgeLogger.groupCollapsed(tpl, ...consoleArgs)
-    createGroupLogs({ ...data, logType })
+    createGroupLogs({ ...group, logType })
     badgeLogger.groupEnd()
   } else {
     badgeLogger.log(tpl, ...consoleArgs)
