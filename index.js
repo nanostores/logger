@@ -1,6 +1,6 @@
 import { lastAction, onBuild, onMount, onSet, onStop } from 'nanostores'
 
-import { log, group } from './printer.js'
+import { log } from './printer.js'
 
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
