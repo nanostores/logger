@@ -32,28 +32,33 @@ let createGroupLogs = ({
     badgeLogger.log(tpl + '%cold', ...consoleArgs, styles.old, oldValue)
   }
   if (message) {
-    badgeLogger.log(`%c${message}`, styles.message)
+    badgeLogger.log(`%c${message}`, styles.text)
   }
 }
 
-export let log = ({ logType, storeName, value, message, group }) => {
+export let log = ({ logType, storeName, message, group }) => {
   let tpl = `%c `
   let consoleArgs = [styles.badge]
-  if (logType) {
-    tpl += `%c${logType}`
-    consoleArgs.push(logTypesStyles[logType])
-  }
-  if (storeName) {
-    tpl += `%c${storeName}`
-    consoleArgs.push(styles.storeName)
-  }
-  if (value) {
-    tpl += ` →`
-    consoleArgs.push(value)
-  }
-  if (message) {
-    tpl += ` %c${message}`
-    consoleArgs.push(styles.message)
+  if (logType === 'change') {
+    tpl += `%c${logType}%c${storeName} %cchanged %c${group.changed}`
+    consoleArgs.push(logTypesStyles[logType], styles.store, styles.text, styles.bold)
+    if (group.actionName) {
+      tpl += ` %cby %c${group.actionName} %caction`
+      consoleArgs.push(styles.text, styles.bold, styles.text)
+    }
+  } else {
+    if (logType) {
+      tpl += `%c${logType}`
+      consoleArgs.push(logTypesStyles[logType])
+    }
+    if (storeName) {
+      tpl += `%c${storeName}`
+      consoleArgs.push(styles.store)
+    }
+    if (message) {
+      tpl += ` %c${message}`
+      consoleArgs.push(styles.text)
+    }
   }
   if (group) {
     badgeLogger.groupCollapsed(tpl, ...consoleArgs)

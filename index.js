@@ -9,7 +9,6 @@ let handleSet = (storeName, store) =>
       {
         logType: 'change',
         storeName,
-        value: newValue,
         group: {
           actionName,
           changed,
