@@ -5,31 +5,11 @@ const badgeLogger = new BadgeLogger(
   'https://nanostores.github.io/nanostores/logo.svg'
 )
 
-export let group = (cb, { logType, storeName, value }) => {
-  let tpl = `%c `
-  let consoleArgs = [styles.badge]
-  if (logType) {
-    tpl += `%c${logType}`
-    consoleArgs.push(logTypesStyles[logType])
-  }
-  if (storeName) {
-    tpl += `%c${storeName}`
-    consoleArgs.push(styles.storeName)
-  }
-  if (value) {
-    tpl += ` →`
-    consoleArgs.push(value)
-  }
-  badgeLogger.groupCollapsed(tpl, ...consoleArgs)
-  cb()
-  badgeLogger.groupEnd()
-}
-
-export let log = ({
+let createGroupLogs = ({
   actionName,
-  changed,
   newValue,
   oldValue,
+  changed,
   message,
   logType
 }) => {
@@ -53,5 +33,32 @@ export let log = ({
   }
   if (message) {
     badgeLogger.log(`%c${message}`, styles.message)
+  }
+}
+
+export let log = ({ logType, storeName, value, message, group }) => {
+  let tpl = `%c `
+  let consoleArgs = [styles.badge]
+  if (logType) {
+    tpl += `%c${logType}`
+    consoleArgs.push(logTypesStyles[logType])
+  }
+  if (storeName) {
+    tpl += `%c${storeName}`
+    consoleArgs.push(styles.storeName)
+  }
+  if (value) {
+    tpl += ` →`
+    consoleArgs.push(value)
+  }
+  if (message) {
+    tpl += message
+  }
+  if (group) {
+    badgeLogger.groupCollapsed(tpl, ...consoleArgs)
+    createGroupLogs({ ...data, logType })
+    badgeLogger.groupEnd()
+  } else {
+    badgeLogger.log(tpl, ...consoleArgs)
   }
 }

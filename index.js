@@ -5,35 +5,34 @@ import { log, group } from './printer.js'
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
     let actionName = store[lastAction]
-    group(
-      () => {
-        log({
+    log(
+      {
+        logType: 'change',
+        storeName,
+        value: newValue,
+        group: {
           actionName,
           changed,
           newValue,
-          oldValue: store.get(),
-          logType: 'change'
-        })
-      },
-      { logType: 'change', storeName, value: newValue }
+          oldValue: store.get()
+        }
+      }
     )
   })
 
 let handleMount = (storeName, store) =>
   onMount(store, () => {
-    group(
-      () => {
-        log({ message: 'Store was mounted' })
-      },
-      { logType: 'mount', storeName }
-    )
+    log({
+      logType: 'mount',
+      storeName,
+      message: 'was mounted'
+    })
     return () => {
-      group(
-        () => {
-          log({ message: 'Store was unmounted' })
-        },
-        { logType: 'unmount', storeName }
-      )
+      log({
+        logType: 'unmount',
+        storeName,
+        message: 'was unmounted'
+      })
     }
   })
 
@@ -45,14 +44,11 @@ let storeLogger = (storeName, store) => {
 let templateLogger = (templateName, template) =>
   onBuild(template, ({ store }) => {
     let storeName = `${templateName}-${store.get().id}`
-    group(
-      () => {
-        log({
-          message: `Logger was connected to ${storeName}`
-        })
-      },
-      { logType: 'build', storeName }
-    )
+    log({
+      logType: 'build',
+      storeName: templateName,
+      message: `built ${storeName}`
+    })
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
       unsubLog()
