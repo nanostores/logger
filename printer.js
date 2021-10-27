@@ -52,7 +52,7 @@ export let log = ({ logType, storeName, value, message, group }) => {
     consoleArgs.push(value)
   }
   if (message) {
-    tpl += message
+    tpl += ` ${message}`
   }
   if (group) {
     badgeLogger.groupCollapsed(tpl, ...consoleArgs)
