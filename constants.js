@@ -1,5 +1,5 @@
 let text = (bold = false) =>
-  `font-family:Menlo,monospace;font-weight:${bold ? 'bold' : 'normal'}`
+  `font-family:Menlo,monospace;font-weight:${bold ? 'bold' : 'normal'};`
 
 let badge = (background, halfRadius = false) =>
   `${text()}padding:0 5px;color:white;background-color:${background};border-radius:${
