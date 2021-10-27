@@ -14,7 +14,7 @@ let createGroupLogs = ({
   logType
 }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.badge]
+  let consoleArgs = [styles.logo]
   if (logType) {
     tpl += `%c${logType}`
     consoleArgs.push(logTypesStyles[logType] + 'border-radius: 99px 0 0 99px;')
@@ -23,7 +23,7 @@ let createGroupLogs = ({
     badgeLogger.log(tpl + '%caction', ...consoleArgs, styles.action, actionName)
   }
   if (changed) {
-    badgeLogger.log(tpl + '%ckey', ...consoleArgs, styles.changed, changed)
+    badgeLogger.log(tpl + '%ckey', ...consoleArgs, styles.key, changed)
   }
   if (newValue) {
     badgeLogger.log(tpl + '%cnew', ...consoleArgs, styles.new, newValue)
@@ -38,7 +38,7 @@ let createGroupLogs = ({
 
 export let log = ({ logType, storeName, message, group }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.badge]
+  let consoleArgs = [styles.logo]
   if (logType === 'change') {
     tpl += `%c${logType}%c${storeName} %cchanged %c${group.changed}`
     consoleArgs.push(logTypesStyles[logType], styles.store, styles.text, styles.bold)

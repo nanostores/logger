@@ -21,7 +21,7 @@ export class BadgeLogger {
     this.shared = shared
     let badgeLoader = (async () => {
       let dataUrl = await toDataURL(src)
-      shared.badge = dataUrl
+      shared.url = dataUrl
     })()
     this.queue = atom([])
     this.queue.push = function (v) {
