@@ -61,7 +61,7 @@ let templateLogger = (templateName, template, nameGetter) =>
   })
 
 let handle = ([storeName, store], nameGetter) =>
-  store.build
+  'build' in store
     ? templateLogger(storeName, store, nameGetter)
     : storeLogger(storeName, store)
 
