@@ -1,5 +1,5 @@
 let printStyles = (background, halfRadius = false) =>
-  `font-family:Menlo,monospace;padding:0 5px;color:white;background-color:${background};border-radius:${
+  `font-family:Menlo,monospace;font-weight:normal;padding:0 5px;color:white;background-color:${background};border-radius:${
     halfRadius ? '0 99px 99px 0' : '99px'
   };`
 
