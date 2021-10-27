@@ -5,7 +5,7 @@ let printStyles = (background, halfRadius = false) =>
 
 export let styles = {
   badge: ({ badge }) =>
-    `background-image: url("${badge}");background-size: cover;color:white;padding: 0 3.5px;margin-right: 4px`,
+    `background-image: url("${badge}");background-size: cover;color:white;padding: 0 3.25px;margin-right: 4px`,
   new: printStyles('#4FA574', true),
   old: printStyles('#4FA574', true),
   action: printStyles('#5351A4', true),
