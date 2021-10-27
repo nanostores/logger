@@ -40,9 +40,9 @@ let storeLogger = (storeName, store) => {
   return () => unsubs.map(fn => fn())
 }
 
-let templateLogger = (templateName, template) =>
+let templateLogger = (templateName, template, nameGetter) =>
   onBuild(template, ({ store }) => {
-    let storeName = `${templateName}-${store.get().id}`
+    let storeName = nameGetter(store, templateName)
     log({
       logType: 'build',
       storeName: templateName,
@@ -55,11 +55,17 @@ let templateLogger = (templateName, template) =>
     })
   })
 
-let handle = ([storeName, store]) =>
-  store.build ? templateLogger(storeName, store) : storeLogger(storeName, store)
+let handle = ([storeName, store], nameGetter) =>
+  store.build
+    ? templateLogger(storeName, store, nameGetter)
+    : storeLogger(storeName, store)
 
-export let logger = deps => {
+let defaultNameGetter = (store, templateName) =>
+  `${templateName}-${store.get().id}`
+
+export let logger = (deps, opts = {}) => {
   deps = Object.entries(deps)
-  let unsubs = deps.map(handle)
+  let nameGetter = opts.nameGetter || defaultNameGetter
+  let unsubs = deps.map(i => handle(i, nameGetter))
   return () => unsubs.map(fn => fn())
 }
