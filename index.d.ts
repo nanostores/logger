@@ -1,4 +1,4 @@
-import { Atom, MapStore, MapTemplate } from 'nanostores'
+import { Atom, MapStore, AnySyncTemplate } from 'nanostores'
 
 type AnyStore = Atom | MapStore | AnySyncTemplate
 
