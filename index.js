@@ -1,6 +1,6 @@
 import { lastAction, onBuild, onMount, onSet, onStop } from 'nanostores'
 
-import { log } from './printer.js'
+import { group, log, nested } from './printer.js'
 
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
@@ -9,17 +9,16 @@ let handleSet = (storeName, store) =>
     if (actionName) {
       message.push(['text', 'by'], ['bold', actionName], ['text', 'action'])
     }
-    log(
-      {
-        logType: 'change',
-        storeName,
-        message,
-        group: {
+    group(
+      { logType: 'change', storeName, message },
+      () => {
+        nested({
           actionName,
           changed,
           newValue,
-          oldValue: store.get()
-        }
+          oldValue: store.get(),
+          logType: 'change'
+        })
       }
     )
   })
