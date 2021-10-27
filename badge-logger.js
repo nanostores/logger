@@ -15,7 +15,7 @@ const toDataURL = url =>
     xhr.send()
   })
 
-export class BageLogger {
+export class BadgeLogger {
   constructor(src, template, shared = {}) {
     this.template = template
     this.shared = shared
