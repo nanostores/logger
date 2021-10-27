@@ -18,9 +18,9 @@ let createLog = ({ logType, storeName, message }) => {
   }
   if (message) {
     if (Array.isArray(message)) {
-      message.forEach(item => {
-        tpl += `%c ${item[1]}`
-        args.push(styles[item[0]])
+      message.forEach(([type, text]) => {
+        tpl += `%c ${text}`
+        args.push(styles[type])
       })
     } else {
       tpl += `%c ${message}`
