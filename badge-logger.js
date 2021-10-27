@@ -19,9 +19,9 @@ export class BadgeLogger {
   constructor(src, template, shared = {}) {
     this.template = template
     this.shared = shared
-    let bageLoader = (async () => {
+    let badgeLoader = (async () => {
       let dataUrl = await toDataURL(src)
-      shared.bage = dataUrl
+      shared.badge = dataUrl
     })()
     this.queue = atom([])
     this.queue.push = function (v) {
@@ -30,7 +30,7 @@ export class BadgeLogger {
     this.queue.clear = function () {
       this.set([])
     }
-    bageLoader.then(() => {
+    badgeLoader.then(() => {
       this.queue.subscribe(messages => {
         if (!messages.length) return
         messages.forEach(({ type, content = [] }) => {

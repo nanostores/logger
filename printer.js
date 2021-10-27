@@ -7,7 +7,7 @@ const badgeLogger = new BadgeLogger(
 
 export let group = (cb, { logType, storeName, value }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.bage]
+  let consoleArgs = [styles.badge]
   if (logType) {
     tpl += `%c${logType}`
     consoleArgs.push(logTypesStyles[logType])
@@ -34,7 +34,7 @@ export let log = ({
   logType
 }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.bage]
+  let consoleArgs = [styles.badge]
   if (logType) {
     tpl += `%c${logType}`
     consoleArgs.push(logTypesStyles[logType] + 'border-radius: 99px 0 0 99px;')
@@ -46,7 +46,7 @@ export let log = ({
     badgeLogger.log(tpl + '%ckey', ...consoleArgs, styles.changed, changed)
   }
   if (newValue) {
-    bageLbadgeLoggerbadgeLoggerogger.log(tpl + '%cnew', ...consoleArgs, styles.new, newValue)
+    badgeLogger.log(tpl + '%cnew', ...consoleArgs, styles.new, newValue)
   }
   if (oldValue) {
     badgeLogger.log(tpl + '%cold', ...consoleArgs, styles.old, oldValue)

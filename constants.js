@@ -4,8 +4,8 @@ let printStyles = (background, halfRadius = false) =>
   };`
 
 export let styles = {
-  bage: ({ bage }) =>
-    `background-image: url("${bage}");background-size: cover;color:white;padding: 0 3.5px;margin-right: 4px`,
+  badge: ({ badge }) =>
+    `background-image: url("${badge}");background-size: cover;color:white;padding: 0 3.5px;margin-right: 4px`,
   new: printStyles('#1da1f2', true),
   old: printStyles('#1da1f2', true),
   action: printStyles('indigo', true),
