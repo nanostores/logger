@@ -1,5 +1,5 @@
 import { styles, logTypesStyles } from './constants.js'
-import { BadgeLogger } from './badge-logger.jss'
+import { BadgeLogger } from './badge-logger.js'
 
 const badgeLogger = new BadgeLogger(
   'https://nanostores.github.io/nanostores/logo.svg'
