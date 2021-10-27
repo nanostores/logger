@@ -10,10 +10,8 @@ export let styles = {
   old: printStyles('#4FA574', true),
   action: printStyles('#5351A4', true),
   changed: printStyles('#429BD7', true),
-  message:
-    'border-radius:10px;font-family:Menlo,monospace;margin-left:4px;padding:0 5px;',
-  storeName:
-    'border-radius:10px;font-family:Menlo,monospace;margin-left:4px;padding:0 5px;'
+  message: 'font-family:Menlo,monospace;font-weight:normal;',
+  storeName: 'font-family:Menlo,monospace;font-weight:bold;margin-left:10px;'
 }
 
 export let logTypesStyles = {
