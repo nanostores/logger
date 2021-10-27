@@ -19,11 +19,11 @@ let createLog = ({ logType, storeName, message }) => {
   if (message) {
     if (Array.isArray(message)) {
       message.forEach(item => {
-        tpl += ` %c${item[1]}`
+        tpl += `%c ${item[1]}`
         args.push(styles[item[0]])
       })
     } else {
-      tpl += ` %c${message}`
+      tpl += `%c ${message}`
       args.push(styles.text)
     }
   }
