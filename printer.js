@@ -39,23 +39,21 @@ let createGroupLogs = ({
 export let log = ({ logType, storeName, message, group }) => {
   let tpl = `%c `
   let consoleArgs = [styles.logo]
-  if (logType === 'change') {
-    tpl += `%c${logType}%c${storeName} %cchanged %c${group.changed}`
-    consoleArgs.push(logTypesStyles[logType], styles.store, styles.text, styles.bold)
-    if (group.actionName) {
-      tpl += ` %cby %c${group.actionName} %caction`
-      consoleArgs.push(styles.text, styles.bold, styles.text)
-    }
-  } else {
-    if (logType) {
-      tpl += `%c${logType}`
-      consoleArgs.push(logTypesStyles[logType])
-    }
-    if (storeName) {
-      tpl += `%c${storeName}`
-      consoleArgs.push(styles.store)
-    }
-    if (message) {
+  if (logType) {
+    tpl += `%c${logType}`
+    consoleArgs.push(logTypesStyles[logType])
+  }
+  if (storeName) {
+    tpl += `%c${storeName}`
+    consoleArgs.push(styles.store)
+  }
+  if (message) {
+    if (Array.isArray(message)) {
+      message.forEach(item => {
+        tpl += ` %c${item[1]}`
+        consoleArgs.push(styles[item[0]])
+      })
+    } else {
       tpl += ` %c${message}`
       consoleArgs.push(styles.text)
     }

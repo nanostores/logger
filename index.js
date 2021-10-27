@@ -5,10 +5,15 @@ import { log } from './printer.js'
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
     let actionName = store[lastAction]
+    let message = [['text', 'was changed in key'], ['bold', changed]]
+    if (actionName) {
+      message.push(['text', 'by'], ['bold', actionName], ['text', 'action'])
+    }
     log(
       {
         logType: 'change',
         storeName,
+        message,
         group: {
           actionName,
           changed,
@@ -45,8 +50,8 @@ let templateLogger = (templateName, template, nameGetter) =>
     let storeName = nameGetter(store, templateName)
     log({
       logType: 'build',
-      storeName: templateName,
-      message: `built ${storeName}`
+      storeName,
+      message: [['text', 'was built by'], ['bold', templateName]]
     })
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
