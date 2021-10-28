@@ -1,5 +1,12 @@
-import { Atom, MapStore, MapTemplate } from 'nanostores'
+import { Atom, MapStore, AnySyncTemplate } from 'nanostores'
 
-export function logger(deps: {
-  [key: string]: Atom | MapTemplate | MapStore
-}): () => void
+type AnyStore = Atom | MapStore | AnySyncTemplate
+
+export function logger(
+  deps: {
+    [key: string]: AnyStore
+  },
+  opts?: {
+    nameGetter?: (store: AnyStore, templateName: string) => string
+  }
+): () => void

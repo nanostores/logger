@@ -1,39 +1,41 @@
 import { lastAction, onBuild, onMount, onSet, onStop } from 'nanostores'
 
-import { log, group } from './printer.js'
+import { group, log, nested } from './printer.js'
 
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
     let actionName = store[lastAction]
+    let message = [['text', 'was changed in key'], ['bold', changed]]
+    if (actionName) {
+      message.push(['text', 'by'], ['bold', actionName], ['text', 'action'])
+    }
     group(
+      { logType: 'change', storeName, message },
       () => {
-        log({
+        nested({
           actionName,
           changed,
           newValue,
           oldValue: store.get(),
           logType: 'change'
         })
-      },
-      { logType: 'change', storeName, value: newValue }
+      }
     )
   })
 
 let handleMount = (storeName, store) =>
   onMount(store, () => {
-    group(
-      () => {
-        log({ message: 'Store was mounted' })
-      },
-      { logType: 'mount', storeName }
-    )
+    log({
+      logType: 'mount',
+      storeName,
+      message: 'was mounted'
+    })
     return () => {
-      group(
-        () => {
-          log({ message: 'Store was unmounted' })
-        },
-        { logType: 'unmount', storeName }
-      )
+      log({
+        logType: 'unmount',
+        storeName,
+        message: 'was unmounted'
+      })
     }
   })
 
@@ -42,17 +44,14 @@ let storeLogger = (storeName, store) => {
   return () => unsubs.map(fn => fn())
 }
 
-let templateLogger = (templateName, template) =>
+let templateLogger = (templateName, template, nameGetter) =>
   onBuild(template, ({ store }) => {
-    let storeName = `${templateName}-${store.get().id}`
-    group(
-      () => {
-        log({
-          message: `Logger was connected to ${storeName}`
-        })
-      },
-      { logType: 'build', storeName }
-    )
+    let storeName = nameGetter(store, templateName)
+    log({
+      logType: 'build',
+      storeName,
+      message: [['text', 'was built by'], ['bold', templateName]]
+    })
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
       unsubLog()
@@ -60,11 +59,17 @@ let templateLogger = (templateName, template) =>
     })
   })
 
-let handle = ([storeName, store]) =>
-  store.build ? templateLogger(storeName, store) : storeLogger(storeName, store)
+let handle = ([storeName, store], nameGetter) =>
+  'build' in store
+    ? templateLogger(storeName, store, nameGetter)
+    : storeLogger(storeName, store)
 
-export let logger = deps => {
+let defaultNameGetter = (store, templateName) =>
+  `${templateName}-${store.get().id}`
+
+export let logger = (deps, opts = {}) => {
   deps = Object.entries(deps)
-  let unsubs = deps.map(handle)
+  let nameGetter = opts.nameGetter || defaultNameGetter
+  let unsubs = deps.map(i => handle(i, nameGetter))
   return () => unsubs.map(fn => fn())
 }

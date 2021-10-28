@@ -1,57 +1,74 @@
 import { styles, logTypesStyles } from './constants.js'
-import { BageLogger } from './bage-logger.js'
+import { BadgeLogger } from './badge-logger.js'
 
-const bageLogger = new BageLogger(
+const badgeLogger = new BadgeLogger(
   'https://nanostores.github.io/nanostores/logo.svg'
 )
 
-export let group = (cb, { logType, storeName, value }) => {
+let createLog = ({ logType, storeName, message }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.bage]
+  let args = [styles.logo]
   if (logType) {
     tpl += `%c${logType}`
-    consoleArgs.push(logTypesStyles[logType])
+    args.push(logTypesStyles[logType])
   }
   if (storeName) {
     tpl += `%c${storeName}`
-    consoleArgs.push(styles.storeName)
+    args.push(styles.store)
   }
-  if (value) {
-    tpl += ` →`
-    consoleArgs.push(value)
+  if (message) {
+    if (Array.isArray(message)) {
+      message.forEach(([type, text]) => {
+        tpl += `%c ${text}`
+        args.push(styles[type])
+      })
+    } else {
+      tpl += `%c ${message}`
+      args.push(styles.text)
+    }
   }
-  bageLogger.groupCollapsed(tpl, ...consoleArgs)
-  cb()
-  bageLogger.groupEnd()
+  return { tpl, args }
 }
 
-export let log = ({
+export let log = ({ logType, storeName, message }) => {
+  let { tpl, args } = createLog({ logType, storeName, message })
+  badgeLogger.log(tpl, ...args)
+}
+
+export let group = ({ logType, storeName, message }, cb) => {
+  let { tpl, args } = createLog({ logType, storeName, message })
+  badgeLogger.groupCollapsed(tpl, ...args)
+  cb()
+  badgeLogger.groupEnd()
+}
+
+export let nested = ({
   actionName,
-  changed,
   newValue,
   oldValue,
+  changed,
   message,
   logType
 }) => {
   let tpl = `%c `
-  let consoleArgs = [styles.bage]
+  let args = [styles.logo]
   if (logType) {
     tpl += `%c${logType}`
-    consoleArgs.push(logTypesStyles[logType] + 'border-radius: 99px 0 0 99px;')
+    args.push(logTypesStyles[logType] + 'border-radius: 99px 0 0 99px;')
   }
   if (actionName) {
-    bageLogger.log(tpl + '%caction', ...consoleArgs, styles.action, actionName)
+    badgeLogger.log(tpl + '%caction', ...args, styles.action, actionName)
   }
   if (changed) {
-    bageLogger.log(tpl + '%ckey', ...consoleArgs, styles.changed, changed)
+    badgeLogger.log(tpl + '%ckey', ...args, styles.key, changed)
   }
   if (newValue) {
-    bageLogger.log(tpl + '%cnew', ...consoleArgs, styles.new, newValue)
+    badgeLogger.log(tpl + '%cnew', ...args, styles.new, newValue)
   }
   if (oldValue) {
-    bageLogger.log(tpl + '%cold', ...consoleArgs, styles.old, oldValue)
+    badgeLogger.log(tpl + '%cold', ...args, styles.old, oldValue)
   }
   if (message) {
-    bageLogger.log(`%c${message}`, styles.message)
+    badgeLogger.log(`%c${message}`, styles.text)
   }
 }

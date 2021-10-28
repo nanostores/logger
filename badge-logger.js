@@ -15,13 +15,13 @@ const toDataURL = url =>
     xhr.send()
   })
 
-export class BageLogger {
+export class BadgeLogger {
   constructor(src, template, shared = {}) {
     this.template = template
     this.shared = shared
-    let bageLoader = (async () => {
+    let badgeLoader = (async () => {
       let dataUrl = await toDataURL(src)
-      shared.bage = dataUrl
+      shared.url = dataUrl
     })()
     this.queue = atom([])
     this.queue.push = function (v) {
@@ -30,7 +30,7 @@ export class BageLogger {
     this.queue.clear = function () {
       this.set([])
     }
-    bageLoader.then(() => {
+    badgeLoader.then(() => {
       this.queue.subscribe(messages => {
         if (!messages.length) return
         messages.forEach(({ type, content = [] }) => {
