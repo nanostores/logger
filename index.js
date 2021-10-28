@@ -12,22 +12,22 @@ import { group, log, nested } from './printer.js'
 let handleSet = (storeName, store) =>
   onSet(store, ({ changed, newValue }) => {
     let actionName = store[lastAction]
-    let message = [
-      ['text', 'was changed in key'],
-      ['bold', changed]
-    ]
+    let message = [['text', 'was changed in key'], ['bold', changed]]
     if (actionName) {
       message.push(['text', 'by'], ['bold', actionName], ['text', 'action'])
     }
-    group({ logType: 'change', storeName, message }, () => {
-      nested({
-        actionName,
-        changed,
-        newValue,
-        oldValue: store.get(),
-        logType: 'change'
-      })
-    })
+    group(
+      { logType: 'change', storeName, message },
+      () => {
+        nested({
+          actionName,
+          changed,
+          newValue,
+          oldValue: store.get(),
+          logType: 'change'
+        })
+      }
+    )
   })
 
 let handleMount = (storeName, store) => {
@@ -64,10 +64,7 @@ let templateLogger = (templateName, template, nameGetter) =>
     log({
       logType: 'build',
       storeName,
-      message: [
-        ['text', 'was built by'],
-        ['bold', templateName]
-      ]
+      message: [['text', 'was built by'], ['bold', templateName]]
     })
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
