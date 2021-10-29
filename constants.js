@@ -19,8 +19,8 @@ export let styles = {
 }
 
 export let logTypesStyles = {
-  mount: badge('#1F49E0'),
   build: badge('#BB5100'),
+  mount: badge('#1F49E0'),
   change: badge('#0E8A00'),
-  unmount: badge('#C74777')
+  unmount: badge('#5C5C5C')
 }
