@@ -1,4 +1,11 @@
-import { lastAction, onBuild, onMount, onSet, onStop } from 'nanostores'
+import {
+  STORE_UNMOUNT_DELAY,
+  lastAction,
+  onBuild,
+  onStart,
+  onStop,
+  onSet
+} from 'nanostores'
 
 import { group, log, nested } from './printer.js'
 
@@ -23,21 +30,28 @@ let handleSet = (storeName, store) =>
     })
   })
 
-let handleMount = (storeName, store) =>
-  onMount(store, () => {
+let handleMount = (storeName, store) => {
+  let unbindStart = onStart(store, () => {
     log({
       logType: 'mount',
       storeName,
       message: 'was mounted'
     })
-    return () => {
+  })
+  let unbindStop = onStop(store, () => {
+    setTimeout(() => {
       log({
         logType: 'unmount',
         storeName,
         message: 'was unmounted'
       })
-    }
+    }, STORE_UNMOUNT_DELAY)
   })
+  return () => {
+    unbindStart()
+    unbindStop()
+  }
+}
 
 let storeLogger = (storeName, store) => {
   let unsubs = [handleSet(storeName, store), handleMount(storeName, store)]
@@ -57,8 +71,10 @@ let templateLogger = (templateName, template, nameGetter) =>
     })
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
-      unsubLog()
-      usubStop()
+      setTimeout(() => {
+        unsubLog()
+        usubStop()
+      }, STORE_UNMOUNT_DELAY + 1)
     })
   })
 
