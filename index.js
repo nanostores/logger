@@ -31,20 +31,27 @@ let handleSet = (storeName, store) =>
   })
 
 let handleMount = (storeName, store) => {
+  let mounted
   let unbindStart = onStart(store, () => {
-    log({
-      logType: 'mount',
-      storeName,
-      message: 'was mounted'
-    })
+    if (!mounted) {
+      mounted = true
+      log({
+        logType: 'mount',
+        storeName,
+        message: 'was mounted'
+      })
+    }
   })
   let unbindStop = onStop(store, () => {
     setTimeout(() => {
-      log({
-        logType: 'unmount',
-        storeName,
-        message: 'was unmounted'
-      })
+      if (mounted) {
+        mounted = false
+        log({
+          logType: 'unmount',
+          storeName,
+          message: 'was unmounted'
+        })
+      }
     }, STORE_UNMOUNT_DELAY)
   })
   return () => {
