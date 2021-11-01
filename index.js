@@ -67,6 +67,7 @@ let storeLogger = (storeName, store) => {
 
 let templateLogger = (templateName, template, nameGetter) =>
   onBuild(template, ({ store }) => {
+    let built = true
     let storeName = nameGetter(store, templateName)
     log({
       logType: 'build',
@@ -79,8 +80,11 @@ let templateLogger = (templateName, template, nameGetter) =>
     let unsubLog = storeLogger(storeName, store)
     let usubStop = onStop(store, () => {
       setTimeout(() => {
-        unsubLog()
-        usubStop()
+        if (built) {
+          built = false
+          unsubLog()
+          usubStop()
+        }
       }, STORE_UNMOUNT_DELAY + 1)
     })
   })
