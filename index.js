@@ -91,7 +91,7 @@ let handle = ([storeName, store], nameGetter) =>
     : storeLogger(storeName, store)
 
 let defaultNameGetter = (store, templateName) =>
-  `${templateName}-${store.get().id}`
+  `${templateName}:${store.get().id}`
 
 export let logger = (deps, opts = {}) => {
   deps = Object.entries(deps)
