@@ -21,7 +21,7 @@ import { logger } from '@nanostores/logger'
 
 import { user, post } from './stores/index.js'
 
-let destroy = logger({
+let unbind = logger({
   user,
   post
 })
