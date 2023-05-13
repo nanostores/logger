@@ -28,7 +28,7 @@
     "node": "^16.0.0 || >=18.0.0"
   },
   "peerDependencies": {
-    "nanostores": "^0.5.0"
+    "nanostores": ">=0.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -54,7 +54,7 @@
     "jest": "^27.2.5",
     "nano-staged": "^0.8.0",
     "nanodelay": "^2.0.1",
-    "nanostores": "nanostores/nanostores#next",
+    "nanostores": "^0.8.1",
     "prettier": "^2.4.1",
     "simple-git-hooks": "^2.8.1",
     "size-limit": "^6.0.3",
