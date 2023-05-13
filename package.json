@@ -1,11 +1,14 @@
 {
   "name": "@nanostores/logger",
   "version": "0.0.0",
-  "description": "Nanostores logger",
+  "description": "Logger of builds, lifecycles and changes for Nano Stores",
   "keywords": [
     "nanostores",
-    "state-managment",
-    "logger"
+    "devtools",
+    "logger",
+    "store",
+    "state",
+    "nano"
   ],
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage && eslint . && check-dts && size-limit",
