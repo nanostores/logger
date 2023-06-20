@@ -11,7 +11,8 @@
     "nano"
   ],
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage && eslint . && check-dts && size-limit",
+    "test": "eslint . && check-dts && size-limit",
+    "test:vitest": "vitest",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch"
   },
   "author": "Eddort <webisforce@gmail.com>",
@@ -32,31 +33,30 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
-    "@logux/eslint-config": "^49.0.0",
+    "@logux/eslint-config": "^50.0.0",
     "@size-limit/preset-small-lib": "^6.0.3",
-    "@types/jest": "^27.0.2",
-    "@types/jsdom": "^16.2.13",
-    "@types/node": "^16.11.0",
+    "@types/node": "^20.2.5",
     "@types/ws": "^8.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.5",
-    "@typescript-eslint/parser": "^5.59.5",
-    "check-dts": "^0.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "c8": "^7.13.0",
+    "check-dts": "^0.7.2",
     "clean-publish": "^3.4.1",
-    "eslint": "^8.40.0",
+    "eslint": "^8.41.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "jest": "^27.2.5",
+    "happy-dom": "^9.20.3",
     "nano-staged": "^0.8.0",
     "nanodelay": "^2.0.1",
     "nanostores": "^0.8.1",
     "prettier": "^2.4.1",
     "simple-git-hooks": "^2.8.1",
     "size-limit": "^6.0.3",
-    "ts-jest": "^27.0.6",
-    "typescript": "^4.4.4"
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1"
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
