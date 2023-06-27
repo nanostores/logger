@@ -12,7 +12,7 @@ devDependencies:
     specifier: ^8.2.6
     version: 8.2.6(size-limit@8.2.6)
   '@types/node':
-    specifier: ^20.3.2
+    specifier: ^20.3.1
     version: 20.3.2
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.60.1
