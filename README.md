@@ -19,21 +19,10 @@ npm install @nanostores/logger
 ```js
 import { logger } from '@nanostores/logger'
 
-import { user, post } from './stores/index.js'
+import { $profile, $users } from './stores/index.js'
 
-let unbind = logger({
-  user,
-  post
-})
-```
-
-Also we have an option for `mapTemplate` (deprecated, but part of Logux Client)
-to name different stores in logs:
-
-```js
-logger({
-  …
-}, {
-  nameGetter: (store, templateName) => `${templateName}:${store.get().id}`
+let destroy = logger({
+  'Profile Store': $profile,
+  'Users Store': $users
 })
 ```
