@@ -1,6 +1,6 @@
 import { atom, deepMap, map } from 'nanostores'
 
-import { logger } from './index.js'
+import { logger } from '../index.js'
 
 let atomStore = atom(0)
 let mapStore = map({ a: 1 })
