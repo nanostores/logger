@@ -24,7 +24,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - name: Install dependencies
-        run: ypnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run tests
         run: pnpm test
 
