@@ -2,16 +2,16 @@ import { actionId, onAction, onMount, onSet } from 'nanostores'
 
 function badge(color) {
   return `
-    padding: 0 5px 2px
-    margin-right: 5px
-    font-weight: 400
-    color: white
-    background-color: ${color}
+    padding: 0 5px 2px;
+    margin-right: 5px;
+    font-weight: 400;
+    color: white;
+    background-color: ${color};
   `
 }
 
 function borders(full) {
-  return `border-radius: ${full ? '4px' : '0 4px 4px 0'}`
+  return `border-radius: ${full ? '4px' : '0 4px 4px 0'};`
 }
 
 const STYLES = {
@@ -21,10 +21,10 @@ const STYLES = {
   change: badge('#0E8A00'),
   error: badge('#c21f1f'),
   logo: `
-    padding: 0 5px 2px
-    color: white
-    background-color: black
-    border-radius: 4px 0 0 4px
+    padding: 0 5px 2px;
+    color: white;
+    background-color: black;
+    border-radius: 4px 0 0 4px;
   `,
   mount: badge('#1F49E0'),
   new: badge('#4FA574'),
