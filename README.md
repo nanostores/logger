@@ -3,8 +3,8 @@
 <img align="right" width="92" height="92" title="Nano Stores logo"
      src="https://nanostores.github.io/nanostores/logo.svg">
 
-Logger of lifecycles and changes for **[Nano Stores]**, a tiny state manager
-with many atomic tree-shakable stores.
+Logger of lifecycles, actions and changes for **[Nano Stores]**,
+a tiny state manager with many atomic tree-shakable stores.
 
 [Nano Stores]: https://github.com/nanostores/nanostores/
 
