@@ -139,6 +139,7 @@ function createLogger(store, storeName) {
 
       onEnd(() => {
         for (let i of queue[id]) i()
+        delete queue[id]
         groupEnd()
       })
     }
