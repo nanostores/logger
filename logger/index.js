@@ -1,4 +1,4 @@
-import { actionId, onAction, onMount, onSet } from 'nanostores'
+import { actionId, onAction, onMount, onNotify, onSet } from 'nanostores'
 
 function badge(color) {
   return `
@@ -70,6 +70,8 @@ function createLog({ logo, message, type, value }) {
 const log = args => console.log(...createLog(args))
 const group = args => console.groupCollapsed(...createLog(args))
 const groupEnd = () => console.groupEnd()
+
+const isDeepMapKey = key => /.+(\..+|\[\d+\.*])/.test(key)
 
 function createLogger(store, storeName) {
   let queue = {}
@@ -145,7 +147,7 @@ function createLogger(store, storeName) {
     }
   )
 
-  let unbindSet = onSet(store, ({ changed, newValue }) => {
+  let unbindSet = onSet(store, ({ changed }) => {
     let currentActionId = store[actionId]
 
     let groupLog = {
@@ -164,33 +166,40 @@ function createLogger(store, storeName) {
       )
     }
 
-    let oldValue = store.value
-    let valueMessage = changed
-      ? `${oldValue[changed]} → ${newValue[changed]}`
-      : 'test'
+    let oldValue = { ...store.value }
+    let unbindNotify = onNotify(store, () => {
+      let newValue = store.value
+      let valueMessage
+      if (changed && !isDeepMapKey(changed)) {
+        valueMessage = `${oldValue[changed]} → ${newValue[changed]}`
+      }
 
-    let run = () => {
-      group(groupLog)
-      log({
-        message: valueMessage,
-        type: 'value'
-      })
-      log({
-        type: 'new',
-        value: newValue
-      })
-      log({
-        type: 'old',
-        value: oldValue
-      })
-      groupEnd()
-    }
+      let run = () => {
+        group(groupLog)
+        if (valueMessage) {
+          log({
+            message: valueMessage,
+            type: 'value'
+          })
+        }
+        log({
+          type: 'new',
+          value: newValue
+        })
+        log({
+          type: 'old',
+          value: oldValue
+        })
+        groupEnd()
+      }
 
-    if (currentActionId) {
-      queue[currentActionId].push(run)
-    } else {
-      run()
-    }
+      if (currentActionId) {
+        queue[currentActionId].push(run)
+      } else {
+        run()
+      }
+      unbindNotify()
+    })
   })
 
   return () => {
