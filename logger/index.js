@@ -154,9 +154,10 @@ function handleAction(store, storeName, queue) {
   })
 }
 
-function handleSet(store, storeName, queue) {
+function handleSet(store, storeName, messages, queue) {
   return onSet(store, ({ changed }) => {
     let currentActionId = store[actionId]
+    if (messages.action === false && currentActionId) return
 
     let groupLog = {
       logo: typeof currentActionId === 'undefined',
@@ -228,7 +229,7 @@ function createLogger(store, storeName, opts) {
   }
 
   if (messages.change !== false) {
-    unbind.push(handleSet(store, storeName, queue))
+    unbind.push(handleSet(store, storeName, messages, queue))
   }
 
   return () => {
