@@ -73,6 +73,7 @@ const log = args => console.log(...createLog(args))
 const group = args => console.groupCollapsed(...createLog(args))
 const groupEnd = () => console.groupEnd()
 
+const isAtom = store => store.setKey === undefined
 const isDeepMapKey = key => /.+(\..+|\[\d+\.*])/.test(key)
 
 function createLogger(store, storeName) {
@@ -168,7 +169,8 @@ function createLogger(store, storeName) {
       )
     }
 
-    let oldValue = { ...store.value }
+    let oldValue = isAtom(store) ? store.value : { ...store.value }
+    oldValue = isDeepMapKey(changed) ? structuredClone(oldValue) : oldValue
     let unbindNotify = onNotify(store, () => {
       let newValue = store.value
       let valueMessage
@@ -188,10 +190,12 @@ function createLogger(store, storeName) {
           type: 'new',
           value: newValue
         })
-        log({
-          type: 'old',
-          value: oldValue
-        })
+        if (oldValue) {
+          log({
+            type: 'old',
+            value: oldValue
+          })
+        }
         groupEnd()
       }
 
