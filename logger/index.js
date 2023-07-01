@@ -33,7 +33,7 @@ const STYLES = {
     background-color: black;
     border-radius: 4px 0 0 4px;
   `,
-  text: 'font-weight: 400'
+  regular: 'font-weight: 400'
 }
 
 function createLog({ logo, message, type, value }) {
@@ -83,7 +83,7 @@ function handleMount(store, storeName, messages) {
         logo: true,
         message: [
           ['bold', storeName],
-          ['text', 'store was mounted']
+          ['regular', 'store was mounted']
         ],
         type: 'mount'
       })
@@ -94,7 +94,7 @@ function handleMount(store, storeName, messages) {
           logo: true,
           message: [
             ['bold', storeName],
-            ['text', 'store was unmounted']
+            ['regular', 'store was unmounted']
           ],
           type: 'unmount'
         })
@@ -109,7 +109,7 @@ function handleAction(store, storeName, queue) {
 
     let message = [
       ['bold', storeName],
-      ['text', 'store was changed by action'],
+      ['regular', 'store was changed by action'],
       ['bold', actionName]
     ]
 
@@ -121,7 +121,7 @@ function handleAction(store, storeName, queue) {
       })
     )
     if (args.length > 0) {
-      message.push(['text', 'with arguments'])
+      message.push(['regular', 'with arguments'])
       queue[id].push(() =>
         log({
           type: 'arguments',
@@ -135,7 +135,7 @@ function handleAction(store, storeName, queue) {
         log({
           message: [
             ['bold', storeName],
-            ['text', 'store handled error in action'],
+            ['regular', 'store handled error in action'],
             ['bold', actionName]
           ],
           type: 'error',
@@ -162,15 +162,15 @@ function handleSet(store, storeName, queue) {
       logo: typeof currentActionId === 'undefined',
       message: [
         ['bold', storeName],
-        ['text', 'store was changed']
+        ['regular', 'store was changed']
       ],
       type: 'change'
     }
     if (changed) {
       groupLog.message.push(
-        ['text', 'in the'],
+        ['regular', 'in the'],
         ['bold', changed],
-        ['text', 'key']
+        ['regular', 'key']
       )
     }
 
