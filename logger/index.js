@@ -215,7 +215,7 @@ function handleSet(store, storeName, queue) {
 }
 
 function createLogger(store, storeName, opts) {
-  let messages = opts.message || {}
+  let messages = opts.messages || {}
   let unbind = []
   let queue = {}
 
