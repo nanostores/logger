@@ -1,4 +1,5 @@
 coverage/
+__snapshots__
 
 **/types.ts
 **/errors.ts
