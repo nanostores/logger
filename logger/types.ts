@@ -13,3 +13,12 @@ let destroy = logger({
 })
 
 destroy()
+
+logger(
+  { atomStore },
+  {
+    messages: {
+      mount: false
+    }
+  }
+)

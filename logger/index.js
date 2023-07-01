@@ -76,88 +76,93 @@ const groupEnd = () => console.groupEnd()
 const isAtom = store => store.setKey === undefined
 const isDeepMapKey = key => /.+(\..+|\[\d+\.*])/.test(key)
 
-function createLogger(store, storeName) {
-  let queue = {}
-
-  let unbindMount = onMount(store, () => {
-    log({
-      logo: true,
-      message: [
-        ['bold', storeName],
-        ['text', 'was mounted']
-      ],
-      type: 'mount'
-    })
-    return () => {
+function handleMount(store, storeName, messages) {
+  return onMount(store, () => {
+    if (messages.mount !== false) {
       log({
         logo: true,
         message: [
           ['bold', storeName],
-          ['text', 'was unmounted']
+          ['text', 'store was mounted']
         ],
-        type: 'unmount'
+        type: 'mount'
       })
+    }
+    return () => {
+      if (messages.unmount !== false) {
+        log({
+          logo: true,
+          message: [
+            ['bold', storeName],
+            ['text', 'store was unmounted']
+          ],
+          type: 'unmount'
+        })
+      }
     }
   })
+}
 
-  let unbindAction = onAction(
-    store,
-    ({ actionName, args, id, onEnd, onError }) => {
-      queue[id] = []
+function handleAction(store, storeName, queue) {
+  return onAction(store, ({ actionName, args, id, onEnd, onError }) => {
+    queue[id] = []
 
-      let message = [
-        ['bold', storeName],
-        ['text', 'was changed by action'],
-        ['bold', actionName]
-      ]
+    let message = [
+      ['bold', storeName],
+      ['text', 'store was changed by action'],
+      ['bold', actionName]
+    ]
 
+    queue[id].push(() =>
+      group({
+        logo: true,
+        message,
+        type: 'action'
+      })
+    )
+    if (args.length > 0) {
+      message.push(['text', 'with arguments'])
       queue[id].push(() =>
-        group({
-          logo: true,
-          message,
-          type: 'action'
+        log({
+          type: 'arguments',
+          value: args
         })
       )
-      if (args.length > 0) {
-        message.push(['text', 'with arguments'])
-        queue[id].push(() =>
-          log({
-            type: 'arguments',
-            value: args
-          })
-        )
-      }
-
-      onError(({ error }) => {
-        queue[id].push(() =>
-          log({
-            message: [
-              ['bold', storeName],
-              ['text', 'handled error in action'],
-              ['bold', actionName]
-            ],
-            type: 'error',
-            value: error
-          })
-        )
-      })
-
-      onEnd(() => {
-        for (let i of queue[id]) i()
-        delete queue[id]
-        groupEnd()
-      })
     }
-  )
 
-  let unbindSet = onSet(store, ({ changed }) => {
+    onError(({ error }) => {
+      queue[id].push(() =>
+        log({
+          message: [
+            ['bold', storeName],
+            ['text', 'store handled error in action'],
+            ['bold', actionName]
+          ],
+          type: 'error',
+          value: {
+            message: error.message
+          }
+        })
+      )
+    })
+
+    onEnd(() => {
+      for (let i of queue[id]) i()
+      delete queue[id]
+      groupEnd()
+    })
+  })
+}
+
+function handleSet(store, storeName, queue) {
+  return onSet(store, ({ changed }) => {
     let currentActionId = store[actionId]
 
     let groupLog = {
       logo: typeof currentActionId === 'undefined',
       message: [
         ['bold', storeName],
-        ['text', 'was changed']
+        ['text', 'store was changed']
       ],
       type: 'change'
     }
@@ -207,17 +212,33 @@ function createLogger(store, storeName) {
       unbindNotify()
     })
   })
+}
+
+function createLogger(store, storeName, opts) {
+  let messages = opts.message || {}
+  let unbind = []
+  let queue = {}
+
+  if (messages.mount !== false || messages.unmount !== false) {
+    unbind.push(handleMount(store, storeName, messages))
+  }
+
+  if (messages.action !== false) {
+    unbind.push(handleAction(store, storeName, queue))
+  }
+
+  if (messages.change !== false) {
+    unbind.push(handleSet(store, storeName, queue))
+  }
 
   return () => {
-    unbindAction()
-    unbindMount()
-    unbindSet()
+    for (let i of unbind) i()
   }
 }
 
-export function logger(stores) {
+export function logger(stores, opts = {}) {
   let unbind = Object.entries(stores).map(([storeName, store]) =>
-    createLogger(store, storeName)
+    createLogger(store, storeName, opts)
   )
   return () => {
     for (let i of unbind) i()
