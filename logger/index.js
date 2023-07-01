@@ -14,7 +14,7 @@ function borders(full) {
   return `border-radius: ${full ? '4px' : '0 4px 4px 0'};`
 }
 
-export const STYLES = {
+const STYLES = {
   badges: {
     action: badge('#5351A4'),
     arguments: badge('#429BD7'),
