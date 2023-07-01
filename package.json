@@ -11,9 +11,8 @@
     "nano"
   ],
   "scripts": {
-    "test": "eslint . && check-dts && size-limit",
-    "test:vitest": "vitest",
-    "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watch"
+    "test": "pnpm unit && eslint . && check-dts && size-limit",
+    "unit": "vitest run"
   },
   "author": "Eddort <webisforce@gmail.com>",
   "license": "MIT",
@@ -83,7 +82,7 @@
     {
       "path": "./index.js",
       "import": "{ logger }",
-      "limit": "1221 B"
+      "limit": "1146 B"
     }
   ],
   "clean-publish": {
