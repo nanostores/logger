@@ -24,6 +24,11 @@ interface LoggerOptionsMessages {
 
 interface LoggerOptions {
   /**
+   * Disable action logs with specific name.
+   */
+  ignoreActions?: string[]
+
+  /**
    * Disable specific log types.
    */
   messages?: LoggerOptionsMessages

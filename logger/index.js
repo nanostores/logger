@@ -1,4 +1,11 @@
-import { actionId, onAction, onMount, onNotify, onSet } from 'nanostores'
+import {
+  actionId,
+  lastAction,
+  onAction,
+  onMount,
+  onNotify,
+  onSet
+} from 'nanostores'
 
 function badge(color) {
   return `
@@ -103,8 +110,10 @@ function handleMount(store, storeName, messages) {
   })
 }
 
-function handleAction(store, storeName, queue) {
+function handleAction(store, storeName, queue, ignoreActions) {
   return onAction(store, ({ actionName, args, id, onEnd, onError }) => {
+    if (ignoreActions && ignoreActions.includes(actionName)) return
+
     queue[id] = []
 
     let message = [
@@ -154,10 +163,13 @@ function handleAction(store, storeName, queue) {
   })
 }
 
-function handleSet(store, storeName, messages, queue) {
+function handleSet(store, storeName, queue, messages, ignoreActions) {
   return onSet(store, ({ changed }) => {
     let currentActionId = store[actionId]
+    let currentActionName = store[lastAction]
+
     if (messages.action === false && currentActionId) return
+    if (ignoreActions && ignoreActions.includes(currentActionName)) return
 
     let groupLog = {
       logo: typeof currentActionId === 'undefined',
@@ -216,6 +228,7 @@ function handleSet(store, storeName, messages, queue) {
 }
 
 function createLogger(store, storeName, opts) {
+  let ignoreActions = opts.ignoreActions
   let messages = opts.messages || {}
   let unbind = []
   let queue = {}
@@ -225,11 +238,11 @@ function createLogger(store, storeName, opts) {
   }
 
   if (messages.action !== false) {
-    unbind.push(handleAction(store, storeName, queue))
+    unbind.push(handleAction(store, storeName, queue, ignoreActions))
   }
 
   if (messages.change !== false) {
-    unbind.push(handleSet(store, storeName, messages, queue))
+    unbind.push(handleSet(store, storeName, queue, messages, ignoreActions))
   }
 
   return () => {

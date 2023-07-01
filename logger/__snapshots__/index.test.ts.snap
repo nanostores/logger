@@ -20,6 +20,19 @@ Nano Stores unmount: $map store was unmounted
 "
 `;
 
+exports[`has option to disable actions with specific name 1`] = `
+"
+Nano Stores mount: $map store was mounted
+Nano Stores action: $map store was changed by action Change User Artworks with arguments
+  arguments: [56]
+  change: $map store was changed in the artworks key
+    value: 303 → 56 
+    new: {\\"artworks\\":56,\\"fullname\\":\\"Ivan Puni\\",\\"id\\":\\"A10\\",\\"username\\":\\"puni\\"}
+    old: {\\"artworks\\":303,\\"fullname\\":\\"Ivan Puni\\",\\"id\\":\\"A10\\",\\"username\\":\\"puni\\"}
+Nano Stores unmount: $map store was unmounted
+"
+`;
+
 exports[`has option to disable change logs 1`] = `
 "
 Nano Stores mount: $atom store was mounted

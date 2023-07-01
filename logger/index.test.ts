@@ -249,3 +249,16 @@ it('has option to disable action logs', async () => {
 
   destroy()
 })
+
+it('has option to disable actions with specific name', async () => {
+  let destroy = logger({ $atom, $map }, { ignoreActions: ['Change User'] })
+
+  let unbindMap = $map.listen(() => {})
+  await changeUser('puni', 'Ivan Puni')
+  changeUserArtworks(56)
+  unbindMap()
+  await delay(STORE_UNMOUNT_DELAY + 10)
+  expect(out).toMatchSnapshot()
+
+  destroy()
+})
