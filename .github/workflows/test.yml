@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 16]
+        node-version: [18]
     name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
