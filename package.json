@@ -14,7 +14,7 @@
     "test": "pnpm unit && eslint . && check-dts && size-limit",
     "unit": "vitest run"
   },
-  "author": "Eddort <webisforce@gmail.com>",
+  "author": "Eduard Aksamitov <e@euaaaio.ru>",
   "license": "MIT",
   "repository": "nanostores/logger",
   "sideEffects": false,
