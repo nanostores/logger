@@ -14,24 +14,26 @@ function borders(full) {
   return `border-radius: ${full ? '4px' : '0 4px 4px 0'};`
 }
 
-const STYLES = {
-  action: badge('#5351A4'),
-  arguments: badge('#429BD7'),
+export const STYLES = {
+  badges: {
+    action: badge('#5351A4'),
+    arguments: badge('#429BD7'),
+    change: badge('#0E8A00'),
+    error: badge('#c21f1f'),
+    mount: badge('#1F49E0'),
+    new: badge('#4FA574'),
+    old: badge('#a44f4f'),
+    unmount: badge('#5C5C5C'),
+    value: badge('#429BD7')
+  },
   bold: 'font-weight: 700',
-  change: badge('#0E8A00'),
-  error: badge('#c21f1f'),
   logo: `
     padding: 0 5px 2px;
     color: white;
     background-color: black;
     border-radius: 4px 0 0 4px;
   `,
-  mount: badge('#1F49E0'),
-  new: badge('#4FA574'),
-  old: badge('#a44f4f'),
-  text: 'font-weight: 400',
-  unmount: badge('#5C5C5C'),
-  value: badge('#429BD7')
+  text: 'font-weight: 400'
 }
 
 function createLog({ logo, message, type, value }) {
@@ -44,7 +46,7 @@ function createLog({ logo, message, type, value }) {
   }
 
   template += `%c${type}`
-  args.push(STYLES[type] + borders(!logo))
+  args.push(STYLES.badges[type] + borders(!logo))
 
   if (message) {
     if (Array.isArray(message)) {
