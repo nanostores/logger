@@ -1,6 +1,8 @@
 coverage/
 __snapshots__
 
+demo/
+
 **/types.ts
 **/errors.ts
 **/*.test.ts

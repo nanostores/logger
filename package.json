@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "test": "pnpm unit && eslint . && check-dts && size-limit",
-    "unit": "vitest run --coverage"
+    "unit": "vitest run --coverage",
+    "demo": "vite ./demo"
   },
   "author": "Eduard Aksamitov <e@euaaaio.ru>",
   "license": "MIT",
@@ -53,6 +54,7 @@
     "simple-git-hooks": "^2.8.1",
     "size-limit": "^8.2.6",
     "typescript": "^5.1.3",
+    "vite": "^4.3.9",
     "vitest": "^0.32.2"
   },
   "simple-git-hooks": {
