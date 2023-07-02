@@ -78,6 +78,9 @@
       "no-console": "off"
     }
   },
+  "eslintIgnore": [
+    "**/errors.ts"
+  ],
   "size-limit": [
     {
       "path": "./index.js",
