@@ -24,12 +24,12 @@ interface LoggerOptionsMessages {
 
 interface LoggerOptions {
   /**
-   * Disable action logs with specific name.
+   * Disable logs of actions with a specific name.
    */
   ignoreActions?: string[]
 
   /**
-   * Disable specific log types.
+   * Disable specific types of logs.
    */
   messages?: LoggerOptionsMessages
 }
@@ -42,8 +42,8 @@ interface LoggerOptions {
  * import { $profile, $users } from './stores/index.js'
  *
  * let destroy = logger({
- *   'Profile Store': $profile,
- *   'Users Store': $users
+ *   'Profile': $profile,
+ *   'Users': $users
  * })
  * ```
  *
