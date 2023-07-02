@@ -33,14 +33,14 @@ const STYLES = {
     unmount: badge('#5C5C5C'),
     value: badge('#429BD7')
   },
-  bold: 'font-weight: 700',
+  bold: 'font-weight: 700;',
   logo: `
     padding: 0 5px 2px;
     color: white;
     background-color: black;
     border-radius: 4px 0 0 4px;
   `,
-  regular: 'font-weight: 400'
+  regular: 'font-weight: 400;'
 }
 
 function createLog({ logo, message, type, value }) {
