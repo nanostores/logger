@@ -48,10 +48,6 @@ let changeUser = action(
   }
 )
 
-let brokenAction = action($map, 'Broken Throw', async () => {
-  throw Error('Something went wrong in the action Throw Error')
-})
-
 let addArtworks = action(
   $deepMap,
   'Add Artworks',
@@ -65,26 +61,21 @@ let addArtworks = action(
   }
 )
 
-logger({ $atom, $deepMap, $map })
+logger({
+  Artist: $map,
+  Counter: $atom,
+  Suprematists: $deepMap
+})
 
 async function run(): Promise<void> {
   let unbindAtom = $atom.listen(() => {})
-  $atom.set(100)
-  $atom.set(101)
-  increaseCounter()
-  increaseCounter()
   increaseCounter()
   unbindAtom()
   await delay(STORE_UNMOUNT_DELAY + 10)
 
   changeUserArtworks(303)
 
-  await changeUser()
   await changeUser('malevich', 'Kazimir Malevich')
-
-  try {
-    await brokenAction()
-  } catch {}
 
   $deepMap.setKey('artists.malevich.movement', 'Suprematism')
   try {
