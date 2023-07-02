@@ -24,7 +24,7 @@ function borders(full) {
 const STYLES = {
   badges: {
     action: badge('#00899A'),
-    arguments: badge('#00899A'),
+    arguments: badge('#007281'),
     change: badge('#0E8A00'),
     error: badge('#C30000'),
     mount: badge('#0059D1'),
