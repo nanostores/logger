@@ -23,15 +23,15 @@ function borders(full) {
 
 const STYLES = {
   badges: {
-    action: badge('#00899a'),
-    arguments: badge('#00899a'),
+    action: badge('#00899A'),
+    arguments: badge('#00899A'),
     change: badge('#0E8A00'),
-    error: badge('#c30000'),
-    mount: badge('#0059d1'),
-    new: badge('#0c7800'),
+    error: badge('#C30000'),
+    mount: badge('#0059D1'),
+    new: badge('#0C7800'),
     old: badge('#943636'),
-    unmount: badge('#5e5e5e'),
-    value: badge('#8a6f00')
+    unmount: badge('#5E5E5E'),
+    value: badge('#8A6F00')
   },
   bold: 'font-weight: 700;',
   logo: `
