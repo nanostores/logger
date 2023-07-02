@@ -14,6 +14,14 @@ a tiny state manager with many atomic tree-shakable stores.
 
 [Nano Stores]: https://github.com/nanostores/nanostores/
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./img/dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="./img/light.png">
+    <img alt="Nano Stores Logger" src="./img/light.png">
+  </picture>
+</p>
+
 ## Install
 
 ```sh

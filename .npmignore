@@ -2,6 +2,7 @@ coverage/
 __snapshots__
 
 demo/
+img/
 
 **/types.ts
 **/errors.ts
