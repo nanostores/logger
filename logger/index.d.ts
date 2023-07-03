@@ -22,7 +22,7 @@ interface LoggerOptionsMessages {
   unmount?: boolean
 }
 
-interface LoggerOptions {
+export interface LoggerOptions {
   /**
    * Disable logs of actions with a specific name.
    */
