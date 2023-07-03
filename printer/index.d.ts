@@ -16,7 +16,7 @@ interface CreateLogOptions {
   logo?: boolean
   message?: [LogMessageStyle, string][] | string
   type: LogType
-  value: unknown
+  value: any
 }
 
 export function log(options: CreateLogOptions): void
