@@ -1,38 +1,6 @@
 import type { AnyStore } from 'nanostores'
 
-interface LoggerOptionsMessages {
-  /**
-   * Disable action logs.
-   */
-  action?: boolean
-
-  /**
-   * Disable change logs.
-   */
-  change?: boolean
-
-  /**
-   * Disable mount logs.
-   */
-  mount?: boolean
-
-  /**
-   * Disable unmount logs.
-   */
-  unmount?: boolean
-}
-
-export interface LoggerOptions {
-  /**
-   * Disable logs of actions with a specific name.
-   */
-  ignoreActions?: string[]
-
-  /**
-   * Disable specific types of logs.
-   */
-  messages?: LoggerOptionsMessages
-}
+import type { LoggerOptions } from '../build-logger/index.js'
 
 /**
  * Display Nanostores events in browser console.

@@ -77,7 +77,8 @@
   "eslintConfig": {
     "extends": "@logux/eslint-config/esm",
     "rules": {
-      "no-console": "off"
+      "no-console": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     }
   },
   "eslintIgnore": [
@@ -87,7 +88,7 @@
     {
       "path": "./index.js",
       "import": "{ logger }",
-      "limit": "1193 B"
+      "limit": "1355 B"
     }
   ],
   "clean-publish": {
