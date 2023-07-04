@@ -1,30 +1,30 @@
 import { logger } from '../logger/index.js'
 import { log } from '../printer/index.js'
 
-function onBuild(template, listener) {
-  let originBuild = template.build
-  template.build = (...args) => {
+function onBuild(creator, listener) {
+  let originBuild = creator.build
+  creator.build = (...args) => {
     let store = originBuild(...args)
     listener(store)
     return store
   }
   return () => {
-    template.build = originBuild
+    creator.build = originBuild
   }
 }
 
-function createCreatorLogger(template, templateName, opts) {
+function createCreatorLogger(creator, creatorName, opts) {
   let unbind = []
   unbind.push(
-    onBuild(template, store => {
-      let storeName = opts.nameGetter(templateName, store)
+    onBuild(creator, store => {
+      let storeName = opts.nameGetter(creatorName, store)
 
       log({
         logo: true,
         message: [
           ['bold', storeName],
           ['regular', 'store was built by'],
-          ['bold', templateName],
+          ['bold', creatorName],
           ['regular', 'creator']
         ],
         type: 'mount'
@@ -43,17 +43,17 @@ function createCreatorLogger(template, templateName, opts) {
   }
 }
 
-const defaultNameGetter = (templateName, store) => {
-  return `${templateName}:${store.value.id}`
+const defaultNameGetter = (creatorName, store) => {
+  return `${creatorName}:${store.value.id}`
 }
 
-export function creatorLogger(templates, opts = {}) {
+export function creatorLogger(creators, opts = {}) {
   opts = {
     nameGetter: defaultNameGetter,
     ...opts
   }
-  let unbind = Object.entries(templates).map(([templateName, template]) =>
-    createCreatorLogger(template, templateName, opts)
+  let unbind = Object.entries(creators).map(([creatorName, creator]) =>
+    createCreatorLogger(creator, creatorName, opts)
   )
   return () => {
     for (let i of unbind) i()
