@@ -3,7 +3,7 @@ import type { AnyStore } from 'nanostores'
 import type { LoggerOptions } from '../build-logger/index.js'
 
 /**
- * Display Nanostores events in browser console.
+ * Displays Nano Stores events in browser console.
  *
  * ```js
  * import { logger } from '@nanostores/logger'

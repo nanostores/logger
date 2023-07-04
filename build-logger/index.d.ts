@@ -99,7 +99,7 @@ interface BuildLoggerEvents {
  *   action: {
  *     start: ({ actionName, args }) => {
  *       let message = `${actionName} was started`
- *       if (args.length) message += `with arguments`
+ *       if (args.length) message += 'with arguments'
  *       console.log(message, args)
  *     },
  *

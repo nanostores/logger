@@ -102,3 +102,65 @@ log({
   ]
 })
 ```
+
+## Advanced usage
+
+### Logging map creators
+
+With `creatorLogger` you can log map creators such as
+[Logux’s SyncMapTemplate](https://logux.io/web-api/#globals-syncmaptemplate).
+
+```js
+import { creatorLogger } from '@nanostores/logger'
+
+let destroy = creatorLogger({ $users }, {
+  nameGetter: (creatorName, store) => {
+    return `${creatorName}:${store.value.id}`
+  }
+})
+```
+
+### Building devtools
+
+If you need to create you own devtools or an extension for you devtools
+we have `buildLogger` method with complex logging logic inside.
+
+```js
+import { buildLogger } from '@nanostores/logger'
+import { $profile } from './stores/index.js'
+
+let destroy = buildLogger($profile, 'Profile', {
+  mount: ({ storeName }) => {
+    console.log(`${storeName} was mounted`)
+  },
+
+  unmount: ({ storeName }) => {
+    console.log(`${storeName} was unmounted`)
+  },
+
+  change: ({ actionName, changed, newValue, oldValue, valueMessage }) => {
+    let message = `${storeName} was changed`
+    if (changed) message += `in the ${changed} key`
+    if (oldValue) message += `from ${oldValue}`
+    message += `to ${newValue}`
+    if (actionName) message += `by action ${actionName}`
+    console.log(message, valueMessage)
+  },
+
+  action: {
+    start: ({ actionName, args }) => {
+      let message = `${actionName} was started`
+      if (args.length) message += 'with arguments'
+      console.log(message, args)
+    },
+
+    error: ({ actionName, error }) => {
+      console.log(`${actionName} was failed`, error)
+    },
+
+    end: ({ actionName }) => {
+      console.log(`${actionName} was ended`)
+    }
+  }
+})
+```
