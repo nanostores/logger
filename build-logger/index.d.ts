@@ -1,6 +1,6 @@
 import type { AnyStore, Store, StoreValue } from 'nanostores'
 
-interface LoggerOptionsMessages {
+export interface LoggerOptionsMessages {
   /**
    * Disable action logs.
    */

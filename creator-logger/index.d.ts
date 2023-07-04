@@ -1,17 +1,6 @@
-import type { MapCreator, MapStore } from 'nanostores'
+import type { MapCreator } from 'nanostores'
 
-import type { LoggerOptions } from '../build-logger/index.js'
-
-interface CreatorLoggerOptions extends LoggerOptions {
-  /**
-   * Custom name getter for stores built with creators.
-   *
-   * @param creatorName Name of the creator.
-   * @param store Store built by the creator.
-   * @returns Custom store name.
-   */
-  nameGetter: (creatorName: string, store: MapStore) => string
-}
+import type { CreatorLoggerOptions } from '../build-creator-logger/index.js'
 
 /**
  * Displays Nano Stores events in browser console.

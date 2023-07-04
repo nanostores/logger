@@ -123,7 +123,8 @@ let destroy = creatorLogger({ $users }, {
 ### Building devtools
 
 If you need to create you own devtools or an extension for you devtools
-we have `buildLogger` method with complex logging logic inside.
+we have `buildLogger` and `buildCreatorLogger` methods
+with complex logging logic inside.
 
 ```js
 import { buildLogger } from '@nanostores/logger'
