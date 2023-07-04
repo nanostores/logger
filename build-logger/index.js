@@ -58,6 +58,7 @@ function handleSet(store, storeName, messages, ignoreActions, events) {
 
       events.change({
         actionId: currentActionId,
+        actionName: currentActionName,
         changed,
         newValue,
         oldValue,

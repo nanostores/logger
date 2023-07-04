@@ -40,6 +40,7 @@ interface EventPayloadBase {
 
 interface EventChangePayload extends EventPayloadBase {
   actionId?: number
+  actionName?: string
   changed?: keyof StoreValue<Store>
   newValue: any
   oldValue?: any
@@ -71,7 +72,7 @@ interface BuildLoggerEvents {
 }
 
 export function buildLogger(
-  stores: AnyStore,
+  store: AnyStore,
   storeName: string,
   events: BuildLoggerEvents,
   opts?: LoggerOptions
