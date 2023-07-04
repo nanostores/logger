@@ -1,6 +1,6 @@
 {
   "name": "@nanostores/logger",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Pretty logger of lifecycles, changes and actions for Nano Stores",
   "keywords": [
     "nanostores",
