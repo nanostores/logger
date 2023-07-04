@@ -4,6 +4,7 @@ function createTagBadgeRegExp(customTypes: string[] = []): RegExp {
       [
         'action',
         'arguments',
+        'build',
         'change',
         'error',
         'mount',
