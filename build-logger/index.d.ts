@@ -71,6 +71,53 @@ interface BuildLoggerEvents {
   unmount?: (payload: EventPayloadBase) => void
 }
 
+/**
+ * Builds logger for Nano Stores.
+ *
+ * ```js
+ * import { buildLogger } from '@nanostores/logger'
+ * import { $profile } from './stores/index.js'
+ *
+ * let destroy = buildLogger($profile, 'Profile', {
+ *   mount: ({ storeName }) => {
+ *     console.log(`${storeName} was mounted`)
+ *   },
+ *
+ *   unmount: ({ storeName }) => {
+ *     console.log(`${storeName} was unmounted`)
+ *   },
+ *
+ *   change: ({ actionName, changed, newValue, oldValue, valueMessage }) => {
+ *     let message = `${storeName} was changed`
+ *     if (changed) message += `in the ${changed} key`
+ *     if (oldValue) message += `from ${oldValue}`
+ *     message += `to ${newValue}`
+ *     if (actionName) message += `by action ${actionName}`
+ *     console.log(message, valueMessage)
+ *   },
+ *
+ *   action: {
+ *     start: ({ actionName, args }) => {
+ *       let message = `${actionName} was started`
+ *       if (args.length) message += `with arguments`
+ *       console.log(message, args)
+ *     },
+ *
+ *     error: ({ actionName, error }) => {
+ *       console.log(`${actionName} was failed`, error)
+ *     },
+ *
+ *     end: ({ actionName }) => {
+ *       console.log(`${actionName} was ended`)
+ *     }
+ *   }
+ * ```
+ *
+ * @param store Any Nano Store
+ * @param storeName Store name.
+ * @param events Events to log.
+ * @param opts Logger options.
+ */
 export function buildLogger(
   store: AnyStore,
   storeName: string,
