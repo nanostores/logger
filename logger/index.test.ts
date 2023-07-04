@@ -9,6 +9,7 @@ import {
 } from 'nanostores'
 import { afterEach, beforeAll, expect, it, vi } from 'vitest'
 
+import { format } from '../test/index.js'
 import { logger } from './index.js'
 
 let $atom = atom()
@@ -74,73 +75,25 @@ let addArtworks = action(
 )
 
 let out = ''
-let group = 0
-
-let tagBadgeRegExp = new RegExp(
-  '%c(' +
-    [
-      'action',
-      'arguments',
-      'change',
-      'error',
-      'mount',
-      'new',
-      'old',
-      'unmount',
-      'value'
-    ]
-      .map(i => `${i}`)
-      .join('|') +
-    ')'
-)
-
-function format(...args: (object | string)[]): string {
-  return (
-    Array.from({ length: group })
-      .map(() => '  ')
-      .join('') +
-    args
-      .filter(arg => {
-        if (typeof arg === 'string') {
-          if (arg.includes('color:') || arg.includes('font-weight:')) {
-            return false
-          }
-          return true
-        }
-        return true
-      })
-      .map(arg => {
-        if (typeof arg === 'string') {
-          return arg
-            .replace(/%c𝖓/, 'Nano Stores ')
-            .replace(tagBadgeRegExp, '$1:')
-            .replace(/%c([^%]+)(%c)?/g, '$1')
-        } else if (typeof arg === 'object') {
-          return JSON.stringify(arg)
-        }
-        return arg
-      })
-      .join(' ')
-  )
-}
+let groups = 0
 
 beforeAll(() => {
   vi.spyOn(console, 'groupCollapsed').mockImplementation((...args: any[]) => {
     console.log(...args)
-    group += 1
+    groups += 1
   })
   vi.spyOn(console, 'log').mockImplementation((...args: any[]) => {
     if (out === '') out += '\n'
-    out += format(...args) + '\n'
+    out += format(groups, [], ...args) + '\n'
   })
   vi.spyOn(console, 'groupEnd').mockImplementation(() => {
-    group -= 1
+    groups -= 1
   })
 })
 
 afterEach(() => {
   out = ''
-  group = 0
+  groups = 0
   cleanStores($atom, $map, $deepMap)
 })
 

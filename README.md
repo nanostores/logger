@@ -41,7 +41,7 @@ let destroy = logger({
 })
 ```
 
-### Filter log messages
+### Filter messages
 
 #### Disable specific types of logs
 
@@ -75,6 +75,30 @@ let destroy = logger({ $users }, {
   ignoreActions: [
     'Change Username',
     'Fetch User Profile'
+  ]
+})
+```
+
+### Custom messages
+
+You can create custom log messages and collapsible nested groups of messages
+with your own name and badge color or with any predefined types.
+
+Available types: `action`, `arguments`, `build`, `change`, `error`, `mount`,
+`new`, `old`, `unmount`, `value`.
+
+```js
+import { group, groupEnd, log } from '@nanostores/logger'
+
+log({
+  logo: true,
+  type: {
+    color: '#510080',
+    name: 'Fetch'
+  },
+  message: [
+    ['bold', 'Profile'],
+    ['regular', 'store is trying to get new values']
   ]
 })
 ```

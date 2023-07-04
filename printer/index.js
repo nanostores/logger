@@ -44,8 +44,13 @@ function createLog({ logo, message, type, value }) {
     args.push(STYLES.logo)
   }
 
-  template += `%c${type}`
-  args.push(STYLES.badges[type] + borders(!logo))
+  if (typeof type === 'string') {
+    template += `%c${type}`
+    args.push(STYLES.badges[type] + borders(!logo))
+  } else if (typeof type === 'object') {
+    template += `%c${type.name.toLowerCase()}`
+    args.push(badge(type.color) + borders(!logo))
+  }
 
   if (message) {
     if (Array.isArray(message)) {

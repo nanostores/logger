@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`prints custom logs 1`] = `
+"
+Nano Stores fetch: Profile store is trying to get new values
+  fetch: Profile store received new values
+"
+`;
