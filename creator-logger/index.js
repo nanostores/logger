@@ -14,13 +14,11 @@ function onBuild(creator, listener) {
 }
 
 function createCreatorLogger(creator, creatorName, opts) {
-  let nameGetter = opts.nameGetter
-  delete opts.nameGetter
-
   let unbind = []
+
   unbind.push(
     onBuild(creator, store => {
-      let storeName = nameGetter(creatorName, store)
+      let storeName = opts.nameGetter(creatorName, store)
 
       log({
         logo: true,
