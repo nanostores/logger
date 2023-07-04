@@ -30,7 +30,7 @@ function createCreatorLogger(creator, creatorName, opts) {
           ['bold', creatorName],
           ['regular', 'creator']
         ],
-        type: 'mount'
+        type: 'build'
       })
 
       unbind.push(logger({ [storeName]: store }, opts))
