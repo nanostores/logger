@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.2.1
+* Fixed broken options in `creatorLogger`.
+
 # 0.2.0
 * Added `creatorLogger` method for logging map creators such as Logux.
 * Added `buildLogger` method for creating own devtools.
