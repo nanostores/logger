@@ -1,18 +1,13 @@
 import type { AnyStore, MapStore } from 'nanostores'
 
-import type {
-  LoggerOptions,
-  LoggerOptionsMessages
-} from '../build-logger/index.js'
-
-interface CreatorLoggerOptionsMessages extends LoggerOptionsMessages {
+interface CreatorLoggerOptionsMessages {
   /**
    * Disable build logs.
    */
   build?: boolean
 }
 
-export interface CreatorLoggerOptions extends LoggerOptions {
+export interface CreatorLoggerOptions {
   messages?: CreatorLoggerOptionsMessages
 
   /**
@@ -22,7 +17,7 @@ export interface CreatorLoggerOptions extends LoggerOptions {
    * @param store Store built by the creator.
    * @returns Custom store name.
    */
-  nameGetter: (creatorName: string, store: MapStore) => string
+  nameGetter?: (creatorName: string, store: MapStore) => string
 }
 
 interface EventBuildStartPayload {
@@ -32,7 +27,7 @@ interface EventBuildStartPayload {
 }
 
 interface BuildCreatorLoggerEvents {
-  build?: (payload: EventBuildPayloadBase) => void
+  build: (payload: EventBuildPayloadBase) => void
 }
 
 /**
@@ -58,5 +53,5 @@ export function buildCreatorLogger(
   store: AnyStore,
   storeName: string,
   events: BuildCreatorLoggerEvents,
-  opts?: LoggerOptions
+  opts?: CreatorLoggerOptions
 ): () => void

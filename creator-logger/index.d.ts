@@ -1,6 +1,7 @@
 import type { MapCreator } from 'nanostores'
 
 import type { CreatorLoggerOptions } from '../build-creator-logger/index.js'
+import type { LoggerOptions } from '../build-logger/index.js'
 
 /**
  * Displays Nano Stores events in browser console.
@@ -10,5 +11,5 @@ import type { CreatorLoggerOptions } from '../build-creator-logger/index.js'
  */
 export function creatorLogger(
   creators: { [key: string]: MapCreator },
-  opts?: CreatorLoggerOptions
+  opts?: CreatorLoggerOptions & LoggerOptions
 ): () => void
