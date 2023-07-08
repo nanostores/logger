@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.2.3
+* Fixed types and exports.
+
 # 0.2.2
 * Added `buildCreatorLogger` method for creating own devtools.
 
