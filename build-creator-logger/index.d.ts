@@ -20,14 +20,14 @@ export interface CreatorLoggerOptions {
   nameGetter?: (creatorName: string, store: MapStore) => string
 }
 
-interface EventBuildStartPayload {
+interface EventBuildPayload {
   creatorName: string
   store: MapStore
   storeName: string
 }
 
 interface BuildCreatorLoggerEvents {
-  build: (payload: EventBuildPayloadBase) => void
+  build: (payload: EventBuildPayload) => void
 }
 
 /**
