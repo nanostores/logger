@@ -11,9 +11,12 @@
     "nano"
   ],
   "scripts": {
-    "test": "pnpm unit && eslint . && check-dts && size-limit",
-    "unit": "vitest run --coverage",
-    "demo": "vite ./demo"
+    "demo": "vite ./demo",
+    "test:lint": "eslint .",
+    "test:coverage": "vitest run --coverage",
+    "test:types": "check-dts",
+    "test:size": "size-limit",
+    "test": "pnpm run /^test:/"
   },
   "author": "Eduard Aksamitov <e@euaaaio.ru>",
   "license": "MIT",
