@@ -17,7 +17,6 @@ destroy()
 logger(
   { atomStore },
   {
-    ignoreActions: ['set'],
     messages: {
       mount: false
     }
