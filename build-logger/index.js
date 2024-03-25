@@ -1,11 +1,4 @@
-import {
-  actionId,
-  lastAction,
-  onAction,
-  onMount,
-  onNotify,
-  onSet
-} from 'nanostores'
+import { onMount, onNotify, onSet } from 'nanostores'
 
 const isAtom = store => store.setKey === undefined
 const isDeepMapKey = key => /.+(\..+|\[\d+\.*])/.test(key)
@@ -23,30 +16,8 @@ function handleMount(store, storeName, messages, events) {
   })
 }
 
-function handleAction(store, storeName, ignoreActions, events) {
-  return onAction(store, ({ actionName, args, id, onEnd, onError }) => {
-    if (ignoreActions && ignoreActions.includes(actionName)) return
-
-    events.action.start({ actionId: id, actionName, args, storeName })
-
-    onError(({ error }) => {
-      events.action.error({ actionId: id, actionName, error, storeName })
-    })
-
-    onEnd(() => {
-      events.action.end({ actionId: id, actionName, storeName })
-    })
-  })
-}
-
-function handleSet(store, storeName, messages, ignoreActions, events) {
+function handleSet(store, storeName, events) {
   return onSet(store, ({ changed }) => {
-    let currentActionId = store[actionId]
-    let currentActionName = store[lastAction]
-
-    if (messages.action === false && currentActionId) return
-    if (ignoreActions && ignoreActions.includes(currentActionName)) return
-
     let oldValue = isAtom(store) ? store.value : { ...store.value }
     oldValue = isDeepMapKey(changed) ? structuredClone(oldValue) : oldValue
     let unbindNotify = onNotify(store, () => {
@@ -57,8 +28,6 @@ function handleSet(store, storeName, messages, ignoreActions, events) {
       }
 
       events.change({
-        actionId: currentActionId,
-        actionName: currentActionName,
         changed,
         newValue,
         oldValue,
@@ -72,7 +41,6 @@ function handleSet(store, storeName, messages, ignoreActions, events) {
 }
 
 export function buildLogger(store, storeName, events, opts = {}) {
-  let ignoreActions = opts.ignoreActions
   let messages = opts.messages || {}
   let unbind = []
 
@@ -80,12 +48,8 @@ export function buildLogger(store, storeName, events, opts = {}) {
     unbind.push(handleMount(store, storeName, messages, events))
   }
 
-  if (messages.action !== false) {
-    unbind.push(handleAction(store, storeName, ignoreActions, events))
-  }
-
   if (messages.change !== false) {
-    unbind.push(handleSet(store, storeName, messages, ignoreActions, events))
+    unbind.push(handleSet(store, storeName, events))
   }
 
   return () => {

@@ -8,7 +8,7 @@ let $atom = atom()
 buildCreatorLogger($atom, 'Atom', {})
 
 buildCreatorLogger($atom, 'Atom', {
-  // THROWS Argument of type '{ mount: () => void; }' is not assignable to
+  // THROWS 'mount' does not exist in typ
   mount: () => {}
 })
 
@@ -20,7 +20,7 @@ buildCreatorLogger(
   },
   {
     messages: {
-      // THROWS Type '{ mount: false; }' is not assignable to
+      // THROWS 'mount' does not exist in type
       mount: false
     }
   }

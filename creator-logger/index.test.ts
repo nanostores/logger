@@ -1,6 +1,6 @@
 import { delay } from 'nanodelay'
 import type { MapCreator, MapStore } from 'nanostores'
-import { action, map, onMount, STORE_UNMOUNT_DELAY } from 'nanostores'
+import { map, onMount, STORE_UNMOUNT_DELAY } from 'nanostores'
 import { afterEach, beforeAll, expect, it, vi } from 'vitest'
 
 import { format } from '../test/index.js'
@@ -57,12 +57,6 @@ afterEach(() => {
 it('prints logs from store builder', async () => {
   let creator = createMapCreator($store => {
     $store.setKey('value', 0)
-    let increaseValue = action($store, 'Increase Value', store => {
-      store.setKey('value', Number(store.get().value) + 1)
-    })
-    increaseValue()
-    increaseValue()
-    increaseValue()
   })
   let destroy = creatorLogger({ 'Map Creator': creator })
 

@@ -1,44 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`handles and throws error in action 1`] = `
-"
-Nano Stores action: $map store was changed by action Broken Throw
-  error: $map store handled error in action Broken Throw {\\"message\\":\\"Something went wrong in the action Throw Error\\"}
-"
-`;
-
-exports[`has option to disable action logs 1`] = `
-"
-Nano Stores mount: $atom store was mounted
-Nano Stores mount: $map store was mounted
-Nano Stores change: $map store was changed in the artworks key
-  value: 303 → 302 
-  new: {\\"artworks\\":302,\\"fullname\\":\\"Kazimir Malevich\\",\\"id\\":\\"A10\\",\\"username\\":\\"malevich\\"}
-  old: {\\"artworks\\":303,\\"fullname\\":\\"Kazimir Malevich\\",\\"id\\":\\"A10\\",\\"username\\":\\"malevich\\"}
-Nano Stores unmount: $atom store was unmounted
-Nano Stores unmount: $map store was unmounted
-"
-`;
-
-exports[`has option to disable actions with specific name 1`] = `
-"
-Nano Stores mount: $map store was mounted
-Nano Stores action: $map store was changed by action Change User Artworks with arguments
-  arguments: [56]
-  change: $map store was changed in the artworks key
-    value: 303 → 56 
-    new: {\\"artworks\\":56,\\"fullname\\":\\"Ivan Puni\\",\\"id\\":\\"A10\\",\\"username\\":\\"puni\\"}
-    old: {\\"artworks\\":303,\\"fullname\\":\\"Ivan Puni\\",\\"id\\":\\"A10\\",\\"username\\":\\"puni\\"}
-Nano Stores unmount: $map store was unmounted
-"
-`;
-
 exports[`has option to disable change logs 1`] = `
 "
 Nano Stores mount: $atom store was mounted
 Nano Stores mount: $map store was mounted
-Nano Stores action: $map store was changed by action Change User Artworks with arguments
-  arguments: [303]
 Nano Stores unmount: $atom store was unmounted
 Nano Stores unmount: $map store was unmounted
 "
@@ -64,62 +29,49 @@ Nano Stores change: $atom store was changed
 Nano Stores change: $atom store was changed
   new: 101
   old: 100
-Nano Stores action: $atom store was changed by action Increase Counter
-  change: $atom store was changed
-    new: 102
-    old: 101
-Nano Stores action: $atom store was changed by action Increase Counter
-  change: $atom store was changed
-    new: 103
-    old: 102
-Nano Stores action: $atom store was changed by action Increase Counter
-  change: $atom store was changed
-    new: 104
-    old: 103
+Nano Stores change: $atom store was changed
+  new: 102
+  old: 101
+Nano Stores change: $atom store was changed
+  new: 103
+  old: 102
+Nano Stores change: $atom store was changed
+  new: 104
+  old: 103
 Nano Stores unmount: $atom store was unmounted
-Nano Stores action: $map store was changed by action Change User Artworks with arguments
-  arguments: [303]
-  change: $map store was changed in the artworks key
-    value: 213 → 303 
-    new: {\\"artworks\\":303,\\"fullname\\":\\"Nikolay Suetin\\",\\"id\\":\\"A10\\",\\"username\\":\\"suetin\\"}
-    old: {\\"artworks\\":213,\\"fullname\\":\\"Nikolay Suetin\\",\\"id\\":\\"A10\\",\\"username\\":\\"suetin\\"}
-Nano Stores action: $map store was changed by action Change User
-  change: $map store was changed in the username key
-    value: suetin → chashnik 
-    new: {\\"artworks\\":303,\\"fullname\\":\\"Nikolay Suetin\\",\\"id\\":\\"A10\\",\\"username\\":\\"chashnik\\"}
-    old: {\\"artworks\\":303,\\"fullname\\":\\"Nikolay Suetin\\",\\"id\\":\\"A10\\",\\"username\\":\\"suetin\\"}
-  change: $map store was changed in the fullname key
-    value: Nikolay Suetin → Ilya Chashnik 
-    new: {\\"artworks\\":303,\\"fullname\\":\\"Ilya Chashnik\\",\\"id\\":\\"A10\\",\\"username\\":\\"chashnik\\"}
-    old: {\\"artworks\\":303,\\"fullname\\":\\"Nikolay Suetin\\",\\"id\\":\\"A10\\",\\"username\\":\\"chashnik\\"}
-Nano Stores action: $map store was changed by action Change User with arguments
-  arguments: [\\"malevich\\",\\"Kazimir Malevich\\"]
-  change: $map store was changed in the username key
-    value: chashnik → malevich 
-    new: {\\"artworks\\":303,\\"fullname\\":\\"Ilya Chashnik\\",\\"id\\":\\"A10\\",\\"username\\":\\"malevich\\"}
-    old: {\\"artworks\\":303,\\"fullname\\":\\"Ilya Chashnik\\",\\"id\\":\\"A10\\",\\"username\\":\\"chashnik\\"}
-  change: $map store was changed in the fullname key
-    value: Ilya Chashnik → Kazimir Malevich 
-    new: {\\"artworks\\":303,\\"fullname\\":\\"Kazimir Malevich\\",\\"id\\":\\"A10\\",\\"username\\":\\"malevich\\"}
-    old: {\\"artworks\\":303,\\"fullname\\":\\"Ilya Chashnik\\",\\"id\\":\\"A10\\",\\"username\\":\\"malevich\\"}
-Nano Stores action: $map store was changed by action Broken Throw
-  error: $map store handled error in action Broken Throw {\\"message\\":\\"Something went wrong in the action Throw Error\\"}
+Nano Stores change: $map store was changed in the artworks key
+  value: 213 → 303 
+  new: {"artworks":303,"fullname":"Nikolay Suetin","id":"A10","username":"suetin"}
+  old: {"artworks":213,"fullname":"Nikolay Suetin","id":"A10","username":"suetin"}
+Nano Stores change: $map store was changed in the username key
+  value: suetin → chashnik 
+  new: {"artworks":303,"fullname":"Nikolay Suetin","id":"A10","username":"chashnik"}
+  old: {"artworks":303,"fullname":"Nikolay Suetin","id":"A10","username":"suetin"}
+Nano Stores change: $map store was changed in the fullname key
+  value: Nikolay Suetin → Ilya Chashnik 
+  new: {"artworks":303,"fullname":"Ilya Chashnik","id":"A10","username":"chashnik"}
+  old: {"artworks":303,"fullname":"Nikolay Suetin","id":"A10","username":"chashnik"}
+Nano Stores change: $map store was changed in the username key
+  value: chashnik → malevich 
+  new: {"artworks":303,"fullname":"Ilya Chashnik","id":"A10","username":"malevich"}
+  old: {"artworks":303,"fullname":"Ilya Chashnik","id":"A10","username":"chashnik"}
+Nano Stores change: $map store was changed in the fullname key
+  value: Ilya Chashnik → Kazimir Malevich 
+  new: {"artworks":303,"fullname":"Kazimir Malevich","id":"A10","username":"malevich"}
+  old: {"artworks":303,"fullname":"Ilya Chashnik","id":"A10","username":"malevich"}
 Nano Stores change: $deepMap store was changed in the artists.malevich.movement key
-  new: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\"],\\"movement\\":\\"Suprematism\\"}}}
-  old: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\"],\\"movement\\":null}}}
+  new: {"artists":{"malevich":{"artworks":["Black Square"],"movement":"Suprematism"}}}
+  old: {"artists":{"malevich":{"artworks":["Black Square"],"movement":null}}}
 Nano Stores mount: $deepMap store was mounted
-Nano Stores action: $deepMap store was changed by action Add Artworks with arguments
-  arguments: [\\"malevich\\",[\\"White on White\\",\\"Suprematist Composition\\",\\"Black Circle\\"]]
-  change: $deepMap store was changed in the artists.malevich.artworks[1] key
-    new: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\",\\"White on White\\",\\"Suprematist Composition\\",\\"Black Circle\\"],\\"movement\\":\\"Suprematism\\"}}}
-    old: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\"],\\"movement\\":\\"Suprematism\\"}}}
-  change: $deepMap store was changed in the artists.malevich.artworks[2] key
-    new: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\",\\"White on White\\",\\"Suprematist Composition\\",\\"Black Circle\\"],\\"movement\\":\\"Suprematism\\"}}}
-    old: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\",\\"White on White\\"],\\"movement\\":\\"Suprematism\\"}}}
-  change: $deepMap store was changed in the artists.malevich.artworks[3] key
-    new: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\",\\"White on White\\",\\"Suprematist Composition\\",\\"Black Circle\\"],\\"movement\\":\\"Suprematism\\"}}}
-    old: {\\"artists\\":{\\"malevich\\":{\\"artworks\\":[\\"Black Square\\",\\"White on White\\",\\"Suprematist Composition\\"],\\"movement\\":\\"Suprematism\\"}}}
-  error: $deepMap store handled error in action Add Artworks {\\"message\\":\\"Something went wrong in action Add Artworks\\"}
+Nano Stores change: $deepMap store was changed in the artists.malevich.artworks[1] key
+  new: {"artists":{"malevich":{"artworks":["Black Square","White on White"],"movement":"Suprematism"}}}
+  old: {"artists":{"malevich":{"artworks":["Black Square"],"movement":"Suprematism"}}}
+Nano Stores change: $deepMap store was changed in the artists.malevich.artworks[2] key
+  new: {"artists":{"malevich":{"artworks":["Black Square","White on White","Suprematist Composition"],"movement":"Suprematism"}}}
+  old: {"artists":{"malevich":{"artworks":["Black Square","White on White"],"movement":"Suprematism"}}}
+Nano Stores change: $deepMap store was changed in the artists.malevich.artworks[3] key
+  new: {"artists":{"malevich":{"artworks":["Black Square","White on White","Suprematist Composition","Black Circle"],"movement":"Suprematism"}}}
+  old: {"artists":{"malevich":{"artworks":["Black Square","White on White","Suprematist Composition"],"movement":"Suprematism"}}}
 Nano Stores unmount: $deepMap store was unmounted
 "
 `;
