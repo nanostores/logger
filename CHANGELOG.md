@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.3.0
+* Updated `nanostores` to 0.10.2.
+
 # 0.2.4
 * Fixed `creatorLogger` types.
 
