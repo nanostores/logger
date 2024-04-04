@@ -57,8 +57,8 @@ devDependencies:
     specifier: ^2.0.2
     version: 2.0.2
   nanostores:
-    specifier: ^0.10.0
-    version: 0.10.0
+    specifier: ^0.10.2
+    version: 0.10.2
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -2436,8 +2436,8 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /nanostores@0.10.0:
-    resolution: {integrity: sha512-Poy5+9wFXOD0jAstn4kv9n686U2BFw48z/W8lms8cS8lcbRz7BU20JxZ3e/kkKQVfRrkm4yLWCUA6GQINdvJCQ==}
+  /nanostores@0.10.2:
+    resolution: {integrity: sha512-Z/nqsDGQvjYTXZcVge06IS8OAJ8Lzb1jLUSAbDDomDBtlSXh88M4toUKW3iKwN+BfblEXhft0KlwJ+bgGi/Ysw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     dev: true
 
