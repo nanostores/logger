@@ -13,6 +13,7 @@ let $creator = createCreator()
 let destroy = creatorLogger(
   { $creator },
   {
+    ignoreActions: ['Increase Value'],
     messages: {
       build: false,
       mount: false
