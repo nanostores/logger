@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 0.4.0
+* Updated `nanostores` to 0.11.2.
+
 # 0.3.0
 * Updated `nanostores` to 0.10.2.
 
