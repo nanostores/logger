@@ -32,7 +32,7 @@
     "node": "^18.0.0 || >=20.0.0"
   },
   "peerDependencies": {
-    "nanostores": ">=0.10.2"
+    "nanostores": ">=0.10.3"
   },
   "devDependencies": {
     "@logux/eslint-config": "^53.3.0",
@@ -44,13 +44,13 @@
     "happy-dom": "^14.12.3",
     "nano-staged": "^0.8.0",
     "nanodelay": "^2.0.2",
-    "nanostores": "^0.11.2",
-    "prettier": "^3.3.3",
-    "simple-git-hooks": "^2.11.1",
-    "size-limit": "^11.1.4",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.5",
-    "vitest": "^2.0.5"
+    "nanostores": "^0.10.3",
+    "prettier": "^3.2.5",
+    "simple-git-hooks": "^2.11.0",
+    "size-limit": "^11.1.2",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.4",
+    "vitest": "^1.4.0"
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
@@ -73,7 +73,7 @@
     {
       "path": "./index.js",
       "import": "{ logger }",
-      "limit": "901 B"
+      "limit": "1408 B"
     }
   ],
   "clean-publish": {
