@@ -1,4 +1,5 @@
 type LogType =
+  | 'action'
   | 'arguments'
   | 'build'
   | 'change'
