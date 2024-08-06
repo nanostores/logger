@@ -4,6 +4,7 @@ import { lastActionId, lastActionName, onAction } from '../action/index.js'
 
 const isAtom = store => store.setKey === undefined
 const isPrimitive = value => value !== Object(value) || value === null
+/* v8 ignore next 7 */
 const clone = value => {
   try {
     return structuredClone(value)
