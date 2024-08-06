@@ -62,7 +62,7 @@ export function action($store, actionName, cb) {
         delete $store[lastActionId]
       }
     }
-    let onError, onEnd
+    let onEnd, onError
     if ($store[actionHook]) {
       ;[onError, onEnd] = $store[actionHook](id, actionName, args)
     }
