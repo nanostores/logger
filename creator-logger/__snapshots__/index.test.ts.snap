@@ -10,16 +10,61 @@ Nano Stores change: Map Creator:1 store was changed in the value key
   value: null → 0 
   new: {"id":"1","value":0}
   old: {"id":"1","value":null}
+Nano Stores action: Map Creator:1 store was changed by action Increase Value
+  change: Map Creator:1 store was changed in the value key
+    value: 0 → 1 
+    new: {"id":"1","value":1}
+    old: {"id":"1","value":0}
+Nano Stores action: Map Creator:1 store was changed by action Increase Value
+  change: Map Creator:1 store was changed in the value key
+    value: 1 → 2 
+    new: {"id":"1","value":2}
+    old: {"id":"1","value":1}
+Nano Stores action: Map Creator:1 store was changed by action Increase Value
+  change: Map Creator:1 store was changed in the value key
+    value: 2 → 3 
+    new: {"id":"1","value":3}
+    old: {"id":"1","value":2}
 Nano Stores mount: Map Creator:2 store was mounted
 Nano Stores change: Map Creator:2 store was changed in the value key
   value: null → 0 
   new: {"id":"2","value":0}
   old: {"id":"2","value":null}
+Nano Stores action: Map Creator:2 store was changed by action Increase Value
+  change: Map Creator:2 store was changed in the value key
+    value: 0 → 1 
+    new: {"id":"2","value":1}
+    old: {"id":"2","value":0}
+Nano Stores action: Map Creator:2 store was changed by action Increase Value
+  change: Map Creator:2 store was changed in the value key
+    value: 1 → 2 
+    new: {"id":"2","value":2}
+    old: {"id":"2","value":1}
+Nano Stores action: Map Creator:2 store was changed by action Increase Value
+  change: Map Creator:2 store was changed in the value key
+    value: 2 → 3 
+    new: {"id":"2","value":3}
+    old: {"id":"2","value":2}
 Nano Stores mount: Map Creator:3 store was mounted
 Nano Stores change: Map Creator:3 store was changed in the value key
   value: null → 0 
   new: {"id":"3","value":0}
   old: {"id":"3","value":null}
+Nano Stores action: Map Creator:3 store was changed by action Increase Value
+  change: Map Creator:3 store was changed in the value key
+    value: 0 → 1 
+    new: {"id":"3","value":1}
+    old: {"id":"3","value":0}
+Nano Stores action: Map Creator:3 store was changed by action Increase Value
+  change: Map Creator:3 store was changed in the value key
+    value: 1 → 2 
+    new: {"id":"3","value":2}
+    old: {"id":"3","value":1}
+Nano Stores action: Map Creator:3 store was changed by action Increase Value
+  change: Map Creator:3 store was changed in the value key
+    value: 2 → 3 
+    new: {"id":"3","value":3}
+    old: {"id":"3","value":2}
 Nano Stores unmount: Map Creator:1 store was unmounted
 Nano Stores unmount: Map Creator:2 store was unmounted
 Nano Stores unmount: Map Creator:3 store was unmounted

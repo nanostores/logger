@@ -1,3 +1,4 @@
+export { action } from './action/index.js'
 export {
   buildCreatorLogger,
   CreatorLoggerOptions

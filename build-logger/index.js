@@ -1,7 +1,17 @@
-import { onMount, onNotify, onSet } from 'nanostores'
+import { getPath, onMount, onNotify, onSet } from 'nanostores'
+
+import { lastActionId, lastActionName, onAction } from '../action/index.js'
 
 const isAtom = store => store.setKey === undefined
-const isDeepMapKey = key => /.+(\..+|\[\d+\.*])/.test(key)
+const isPrimitive = value => value !== Object(value) || value === null
+/* v8 ignore next 7 */
+const clone = value => {
+  try {
+    return structuredClone(value)
+  } catch {
+    return { ...value }
+  }
+}
 
 function handleMount(store, storeName, messages, events) {
   return onMount(store, () => {
@@ -16,18 +26,37 @@ function handleMount(store, storeName, messages, events) {
   })
 }
 
-function handleSet(store, storeName, events) {
-  return onSet(store, ({ changed }) => {
-    let oldValue = isAtom(store) ? store.value : { ...store.value }
-    oldValue = isDeepMapKey(changed) ? structuredClone(oldValue) : oldValue
-    let unbindNotify = onNotify(store, () => {
-      let newValue = store.value
+function handleSet(store, storeName, messages, ignoreActions, events) {
+  return onSet(store, () => {
+    let currentActionId = store[lastActionId]
+    let currentActionName = store[lastActionName]
+
+    if (messages.action === false && currentActionId) return
+    if (ignoreActions.includes(currentActionName)) return
+
+    let oldValue = clone(store.value)
+
+    let unbindNotify = onNotify(store, ({ changed }) => {
+      let newValue = clone(store.value)
+
       let valueMessage
-      if (changed && !isDeepMapKey(changed)) {
-        valueMessage = `${oldValue[changed]} → ${newValue[changed]}`
+      if (isAtom(store)) {
+        if (isPrimitive(newValue) && isPrimitive(oldValue)) {
+          valueMessage = `${oldValue} → ${newValue}`
+          oldValue = undefined
+          newValue = undefined
+        }
+      } else if (changed) {
+        let oldPrimitiveValue = getPath(oldValue, changed)
+        let newPrimitiveValue = getPath(newValue, changed)
+        if (isPrimitive(oldPrimitiveValue) && isPrimitive(newPrimitiveValue)) {
+          valueMessage = `${oldPrimitiveValue} → ${newPrimitiveValue}`
+        }
       }
 
       events.change({
+        actionId: currentActionId,
+        actionName: currentActionName,
         changed,
         newValue,
         oldValue,
@@ -40,7 +69,24 @@ function handleSet(store, storeName, events) {
   })
 }
 
+function handleAction(store, storeName, ignoreActions, events) {
+  return onAction(store, ({ actionName, args, id, onEnd, onError }) => {
+    if (ignoreActions.includes(actionName)) return
+
+    events.action.start({ actionId: id, actionName, args, storeName })
+
+    onError(({ error }) => {
+      events.action.error({ actionId: id, actionName, error, storeName })
+    })
+
+    onEnd(() => {
+      events.action.end({ actionId: id, actionName, storeName })
+    })
+  })
+}
+
 export function buildLogger(store, storeName, events, opts = {}) {
+  let ignoreActions = opts.ignoreActions || []
   let messages = opts.messages || {}
   let unbind = []
 
@@ -49,7 +95,11 @@ export function buildLogger(store, storeName, events, opts = {}) {
   }
 
   if (messages.change !== false) {
-    unbind.push(handleSet(store, storeName, events))
+    unbind.push(handleSet(store, storeName, messages, ignoreActions, events))
+  }
+
+  if (messages.action !== false) {
+    unbind.push(handleAction(store, storeName, ignoreActions, events))
   }
 
   return () => {
