@@ -69,16 +69,6 @@
       "eslint --fix"
     ]
   },
-  "eslintConfig": {
-    "extends": "@logux/eslint-config/ts",
-    "rules": {
-      "no-console": "off",
-      "@typescript-eslint/no-explicit-any": "off"
-    }
-  },
-  "eslintIgnore": [
-    "**/errors.ts"
-  ],
   "size-limit": [
     {
       "path": "./index.js",
