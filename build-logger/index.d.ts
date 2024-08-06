@@ -35,14 +35,6 @@ interface EventChangePayload extends EventPayloadBase {
   valueMessage?: string
 }
 
-interface EventActionStartPayload extends EventActionPayload {
-  args: any[]
-}
-
-interface EventActionErrorPayload extends EventActionPayload {
-  error: Error
-}
-
 interface BuildLoggerEvents {
   change?: (payload: EventChangePayload) => void
   mount?: (payload: EventPayloadBase) => void
@@ -65,12 +57,11 @@ interface BuildLoggerEvents {
  *     console.log(`${storeName} was unmounted`)
  *   },
  *
- *   change: ({ actionName, changed, newValue, oldValue, valueMessage }) => {
+ *   change: ({ changed, newValue, oldValue, valueMessage }) => {
  *     let message = `${storeName} was changed`
  *     if (changed) message += `in the ${changed} key`
  *     if (oldValue) message += `from ${oldValue}`
  *     message += `to ${newValue}`
- *     if (actionName) message += `by action ${actionName}`
  *     console.log(message, valueMessage)
  *   }
  * ```
