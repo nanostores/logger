@@ -8,7 +8,7 @@ logger({
 })
 
 let atomStore = atom()
-// THROWS Argument of type 'WritableAtom<unknown>'
+// THROWS Argument of type 'PreinitializedWritableAtom<unknown>'
 logger(atomStore)
 
 logger(
