@@ -87,11 +87,12 @@ interface BuildLoggerEvents {
  *     console.log(`${storeName} was unmounted`)
  *   },
  *
- *   change: ({ changed, newValue, oldValue, valueMessage }) => {
+ *   change: ({ actionName, changed, newValue, oldValue, valueMessage }) => {
  *     let message = `${storeName} was changed`
  *     if (changed) message += `in the ${changed} key`
  *     if (oldValue) message += `from ${oldValue}`
  *     message += `to ${newValue}`
+ *     if (actionName) message += `by action ${actionName}`
  *     console.log(message, valueMessage)
  *   },
  *
