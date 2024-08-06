@@ -73,7 +73,7 @@
     {
       "path": "./index.js",
       "import": "{ logger }",
-      "limit": "924 B"
+      "limit": "901 B"
     }
   ],
   "clean-publish": {
