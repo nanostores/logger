@@ -121,7 +121,7 @@ let destroy = buildLogger($profile, 'Profile', {
     console.log(`${storeName} was unmounted`)
   },
 
-  change: ({ changed, newValue, oldValue, valueMessage }) => {
+  change: ({ storeName, changed, newValue, oldValue, valueMessage }) => {
     let message = `${storeName} was changed`
     if (changed) message += `in the ${changed} key`
     if (oldValue) message += `from ${oldValue}`
