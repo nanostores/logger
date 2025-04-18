@@ -1,7 +1,7 @@
 {
   "name": "@nanostores/logger",
-  "version": "0.4.0",
-  "description": "Pretty logger of lifecycles and changes for Nano Stores",
+  "version": "0.3.0",
+  "description": "Pretty logger of lifecycles, changes and actions for Nano Stores",
   "keywords": [
     "nanostores",
     "devtools",
@@ -28,29 +28,36 @@
     ".": "./index.js",
     "./package.json": "./package.json"
   },
+  "packageManager": "pnpm@10.8.0",
   "engines": {
-    "node": "^18.0.0 || >=20.0.0"
+    "node": "^20.0.0 || >=22.0.0"
   },
+  "funding": [
+    {
+      "type": "buymeacoffee",
+      "url": "https://buymeacoffee.com/euaaaio"
+    }
+  ],
   "peerDependencies": {
-    "nanostores": ">=0.10.2"
+    "nanostores": "^0.10.0 || ^0.11.0 || ^1.0.0"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^53.3.0",
-    "@size-limit/preset-small-lib": "^11.1.4",
-    "@types/node": "^22.1.0",
-    "@vitest/coverage-v8": "^2.0.5",
-    "check-dts": "^0.8.0",
-    "eslint": "^9.8.0",
-    "happy-dom": "^14.12.3",
+    "@logux/eslint-config": "^55.2.1",
+    "@size-limit/preset-small-lib": "^11.2.0",
+    "@types/node": "^22.14.1",
+    "@vitest/coverage-v8": "^3.1.1",
+    "check-dts": "^0.9.0",
+    "eslint": "^9.25.0",
+    "happy-dom": "^17.4.4",
     "nano-staged": "^0.8.0",
     "nanodelay": "^2.0.2",
-    "nanostores": "^0.11.2",
-    "prettier": "^3.3.3",
-    "simple-git-hooks": "^2.11.1",
-    "size-limit": "^11.1.4",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.5",
-    "vitest": "^2.0.5"
+    "nanostores": "^1.0.1",
+    "prettier": "^3.5.3",
+    "simple-git-hooks": "^2.12.1",
+    "size-limit": "^11.2.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.2",
+    "vitest": "^3.1.1"
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
@@ -73,7 +80,7 @@
     {
       "path": "./index.js",
       "import": "{ logger }",
-      "limit": "901 B"
+      "limit": "1408 B"
     }
   ],
   "clean-publish": {

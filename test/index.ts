@@ -2,6 +2,7 @@ function createTagBadgeRegExp(customTypes: string[] = []): RegExp {
   return new RegExp(
     '%c(' +
       [
+        'action',
         'arguments',
         'build',
         'change',
@@ -13,7 +14,7 @@ function createTagBadgeRegExp(customTypes: string[] = []): RegExp {
         'value',
         ...customTypes
       ]
-        .map(i => `${i}`)
+        .map(i => i)
         .join('|') +
       ')'
   )

@@ -3,7 +3,7 @@
 <img align="right" width="92" height="92" title="Nano Stores logo"
      src="https://nanostores.github.io/nanostores/logo.svg">
 
-Logger of lifecycles and changes for **[Nano Stores]**,
+Logger of lifecycles, changes and actions for **[Nano Stores]**,
 a tiny state manager with many atomic tree-shakable stores.
 
 * **Clean.** All messages are stacked in compact, collapsible nested groups.
@@ -46,7 +46,7 @@ let destroy = logger({
 #### Disable specific types of logs
 
 Using `messages` option you can disable
-**mount**, **unmount** or **change** log messages.
+**mount**, **unmount**, **change** or **action** log messages.
 
 ```js
 import { logger } from '@nanostores/logger'
@@ -61,12 +61,30 @@ let destroy = logger({ $users }, {
 })
 ```
 
+#### Disable logs of actions with a specific name
+
+Using the `ignoreActions` option, you can specify the names of actions
+that will not be logged.
+
+```js
+import { logger } from '@nanostores/logger'
+
+import { $users } from './stores/index.js'
+
+let destroy = logger({ $users }, {
+  ignoreActions: [
+    'Change Username',
+    'Fetch User Profile'
+  ]
+})
+```
+
 ### Custom messages
 
 You can create custom log messages and collapsible nested groups of messages
 with your own name and badge color or with any predefined types.
 
-Available types: `arguments`, `build`, `change`, `error`, `mount`,
+Available types: `action`, `arguments`, `build`, `change`, `error`, `mount`,
 `new`, `old`, `unmount`, `value`.
 
 ```js
@@ -121,12 +139,29 @@ let destroy = buildLogger($profile, 'Profile', {
     console.log(`${storeName} was unmounted`)
   },
 
-  change: ({ storeName, changed, newValue, oldValue, valueMessage }) => {
+  change: ({ storeName, actionName, changed, newValue, oldValue, valueMessage }) => {
     let message = `${storeName} was changed`
     if (changed) message += `in the ${changed} key`
     if (oldValue) message += `from ${oldValue}`
     message += `to ${newValue}`
+    if (actionName) message += `by action ${actionName}`
     console.log(message, valueMessage)
+  },
+
+  action: {
+    start: ({ actionName, args }) => {
+      let message = `${actionName} was started`
+      if (args.length) message += 'with arguments'
+      console.log(message, args)
+    },
+
+    error: ({ actionName, error }) => {
+      console.log(`${actionName} was failed`, error)
+    },
+
+    end: ({ actionName }) => {
+      console.log(`${actionName} was ended`)
+    }
   }
 })
 ```

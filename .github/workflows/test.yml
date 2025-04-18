@@ -7,6 +7,9 @@ on:
       - next
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   full:
     name: Node.js Latest Full
@@ -18,12 +21,12 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.8.0
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 23
           cache: pnpm
 
       - name: Install dependencies
@@ -36,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20, 18]
+        node-version: [22, 20]
     name: Node.js ${{ matrix.node-version }} Quick
     steps:
       - name: Checkout the repository
@@ -45,7 +48,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.8.0
 
       - name: Install Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4

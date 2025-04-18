@@ -1,6 +1,11 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0
+* Added experimental `action` API.
+* Updated `nanostores` to 1.0.1.
+* Removed Node.js 18 support.
+
 ## 0.4.0
 * Updated `nanostores` to 0.11.2.
 
