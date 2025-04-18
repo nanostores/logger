@@ -28,6 +28,7 @@
     ".": "./index.js",
     "./package.json": "./package.json"
   },
+  "packageManager": "pnpm@10.8.0",
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
   },
