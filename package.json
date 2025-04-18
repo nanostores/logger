@@ -31,6 +31,12 @@
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
+  "funding": [
+    {
+      "type": "buymeacoffee",
+      "url": "https://buymeacoffee.com/euaaaio"
+    }
+  ],
   "peerDependencies": {
     "nanostores": ">=0.10.3"
   },
