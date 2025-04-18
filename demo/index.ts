@@ -1,6 +1,7 @@
 import { delay } from 'nanodelay'
 import { atom, deepMap, map, STORE_UNMOUNT_DELAY } from 'nanostores'
 
+import { action } from '../action/index.js'
 import { logger } from '../index.js'
 
 let $atom = atom()
@@ -20,11 +21,46 @@ let $deepMap = deepMap<{
 }>({
   artists: {
     malevich: {
-      artworks: ['Black Square'],
+      artworks: [],
       movement: null
     }
   }
 })
+
+let increaseCounter = action($atom, 'Increase Counter', store => {
+  store.set(Number(store.get()) + 1)
+})
+
+let changeUserArtworks = action(
+  $map,
+  'Change User Artworks',
+  (store, value) => {
+    store.setKey('artworks', value)
+  }
+)
+
+let changeUser = action(
+  $map,
+  'Change User',
+  async (store, username = 'chashnik', fullname = 'Ilya Chashnik') => {
+    await delay(1000)
+    store.setKey('username', username)
+    store.setKey('fullname', fullname)
+  }
+)
+
+let addArtworks = action(
+  $deepMap,
+  'Add Artworks',
+  async (store, artist: string, artworks: string[]) => {
+    for (let item of artworks) {
+      await delay(100)
+      let index = store.get().artists.malevich.artworks.length
+      store.setKey(`artists.${artist}.artworks[${index}]`, item)
+    }
+    throw Error('Something went wrong in action Add Artworks')
+  }
+)
 
 logger({
   Artist: $map,
@@ -36,30 +72,26 @@ async function run(): Promise<void> {
   let unbindAtom = $atom.listen(() => {})
   $atom.set(100)
   $atom.set(101)
-  $atom.set(Number($atom.get()) + 1)
-  $atom.set(Number($atom.get()) + 1)
-  $atom.set(Number($atom.get()) + 1)
+  increaseCounter()
+  increaseCounter()
+  increaseCounter()
   unbindAtom()
   await delay(STORE_UNMOUNT_DELAY + 10)
 
-  $map.setKey('artworks', 303)
+  changeUserArtworks(303)
 
-  await delay(STORE_UNMOUNT_DELAY)
-  $map.setKey('username', 'chashnik')
-  $map.setKey('fullname', 'Ilya Chashnik')
-
-  await delay(STORE_UNMOUNT_DELAY)
-  $map.setKey('username', 'malevich')
-  $map.setKey('fullname', 'Kazimir Malevich')
+  await changeUser()
+  await changeUser('malevich', 'Kazimir Malevich')
 
   $deepMap.setKey('artists.malevich.movement', 'Suprematism')
 
-  let artworks = ['White on White', 'Suprematist Composition', 'Black Circle']
-  for (let item of artworks) {
-    await delay(100)
-    let index = $deepMap.get().artists.malevich.artworks.length
-    $deepMap.setKey(`artists.malevich.artworks[${index}]`, item)
-  }
+  try {
+    await addArtworks('malevich', [
+      'White on White',
+      'Suprematist Composition',
+      'Black Circle'
+    ])
+  } catch {}
   await delay(STORE_UNMOUNT_DELAY + 10)
 }
 

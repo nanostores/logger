@@ -14,6 +14,8 @@ logger(atomStore)
 logger(
   { atomStore },
   {
+    // THROWS Type 'string' is not assignable to type 'string[]'
+    ignoreActions: 'set',
     messages: {
       // THROWS Type 'string' is not assignable to type 'boolean | undefined'.
       mount: ''

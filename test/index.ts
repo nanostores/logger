@@ -2,6 +2,7 @@ function createTagBadgeRegExp(customTypes: string[] = []): RegExp {
   return new RegExp(
     '%c(' +
       [
+        'action',
         'arguments',
         'build',
         'change',
