@@ -39,7 +39,7 @@
     }
   ],
   "peerDependencies": {
-    "nanostores": ">=1.0.1"
+    "nanostores": "^0.10.0 || ^0.11.0 || ^1.0.0"
   },
   "devDependencies": {
     "@logux/eslint-config": "^55.2.1",
