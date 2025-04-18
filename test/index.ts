@@ -14,7 +14,7 @@ function createTagBadgeRegExp(customTypes: string[] = []): RegExp {
         'value',
         ...customTypes
       ]
-        .map(i => `${i}`)
+        .map(i => i)
         .join('|') +
       ')'
   )

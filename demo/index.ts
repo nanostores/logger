@@ -34,7 +34,7 @@ let increaseCounter = action($atom, 'Increase Counter', store => {
 let changeUserArtworks = action(
   $map,
   'Change User Artworks',
-  (store, value) => {
+  (store, value: number) => {
     store.setKey('artworks', value)
   }
 )
@@ -42,7 +42,11 @@ let changeUserArtworks = action(
 let changeUser = action(
   $map,
   'Change User',
-  async (store, username = 'chashnik', fullname = 'Ilya Chashnik') => {
+  async (
+    store,
+    username: string = 'chashnik',
+    fullname: string = 'Ilya Chashnik'
+  ) => {
     await delay(1000)
     store.setKey('username', username)
     store.setKey('fullname', fullname)

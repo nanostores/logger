@@ -57,6 +57,7 @@ let changeUser = action(
   }
 )
 
+// eslint-disable-next-line @typescript-eslint/require-await
 let brokenAction = action($map, 'Broken Throw', async () => {
   throw Error('Something went wrong in the action Throw Error')
 })
@@ -64,6 +65,7 @@ let brokenAction = action($map, 'Broken Throw', async () => {
 let addArtworks = action(
   $deepMap,
   'Add Artworks',
+  // eslint-disable-next-line @typescript-eslint/require-await
   async (store, artist: string, artworks: string[]) => {
     for (let item of artworks) {
       // await delay(100)
