@@ -108,7 +108,7 @@ log({
 ### Logging map creators
 
 With `creatorLogger` you can log map creators such as
-[Logux’s SyncMapTemplate](https://logux.io/web-api/#globals-syncmaptemplate).
+[Logux’s SyncMapTemplate](https://logux.org/web-api/#globals-syncmaptemplate).
 
 ```js
 import { creatorLogger } from '@nanostores/logger'
