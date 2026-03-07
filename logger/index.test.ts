@@ -1,11 +1,6 @@
+import { deepMap } from '@nanostores/deepmap'
 import { delay } from 'nanodelay'
-import {
-  atom,
-  cleanStores,
-  deepMap,
-  map,
-  STORE_UNMOUNT_DELAY
-} from 'nanostores'
+import { atom, cleanStores, map, STORE_UNMOUNT_DELAY } from 'nanostores'
 import { afterEach, beforeAll, expect, it, vi } from 'vitest'
 
 import { action } from '../index.js'

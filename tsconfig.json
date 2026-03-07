@@ -11,6 +11,7 @@
     "jsx": "react"
   },
   "exclude": [
-    "**/errors.ts"
+    "**/errors.ts",
+    "vitest.config.ts"
   ]
 }

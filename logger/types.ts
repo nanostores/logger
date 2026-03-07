@@ -1,4 +1,5 @@
-import { atom, deepMap, map } from 'nanostores'
+import { deepMap } from '@nanostores/deepmap'
+import { atom, map } from 'nanostores'
 
 import { logger } from './index.js'
 
