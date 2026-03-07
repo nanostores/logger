@@ -22,11 +22,13 @@ a tiny state manager with many atomic tree-shakable stores.
   </picture>
 </p>
 
+
 ## Install
 
 ```sh
 npm install @nanostores/logger
 ```
+
 
 ## Usage
 
@@ -79,6 +81,36 @@ let destroy = logger({ $users }, {
 })
 ```
 
+
+### Actions
+
+Wrap store changes in `action()` to see action names in the logger.
+
+```js
+import { action } from '@nanostores/logger'
+import { atom, map } from 'nanostores'
+
+let $counter = atom(0)
+
+let increase = action($counter, 'Increase', ($store, value = 1) => {
+  $store.set($store.get() + value)
+  return $store.get()
+})
+
+increase()  //=> 1
+increase(5) //=> 6
+```
+
+Works with `map()` stores via `$store.setKey()`. Supports async
+callbacks — the logger will track start, end and errors automatically.
+
+```js
+let fetchUser = action($user, 'Fetch User', async ($store, id) => {
+  $store.set(await api.getUser(id))
+})
+```
+
+
 ### Custom messages
 
 You can create custom log messages and collapsible nested groups of messages
@@ -102,6 +134,7 @@ log({
   ]
 })
 ```
+
 
 ## Advanced usage
 
